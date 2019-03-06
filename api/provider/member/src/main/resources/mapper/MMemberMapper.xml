@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <result property="lastLoginTime"  column="last_login_time" javaType="Integer"/>
     <result property="inviteCode"  column="invite_code" javaType="String"/>
     <result property="loginTelType"  column="login_tel_type" javaType="Integer"/>
+    <result property="loginType"  column="login_type" javaType="Integer"/>
     <result property="lastLoginIp"  column="last_login_ip" javaType="String"/>
     <result property="headImg"  column="head_img" javaType="String"/>
     <result property="registerType"  column="register_type" javaType="Integer"/>
@@ -56,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectMMemberVo">
-        select id, telephone, sex, birthday, qq, qq_id, wechat, wx_id, nickname, app_version, lock_flag, withdrawal_password, password, email, register_time, last_login_time, invite_code, login_tel_type, last_login_ip, head_img, register_type, oils_balance, oils_recharge_balance, gas_balance, etc_balance, settle_quota, settle_balance, freezing_amount, amount_used, present_amount, total_recharge, total_loaning, total_settle, recharge_balance, loaning_balance, credit, integral, real_name, address, driver_auth_status, personal_auth_status, company_auth_status, car_owner_auth_status, shipper_auth_status, car_owner_issued_status, is_update, is_lsj_data, freezing_amount_withdrawals from m_member
+        select id, telephone, sex, birthday, qq, qq_id, wechat, wx_id, nickname, app_version, lock_flag, withdrawal_password, password, email, register_time, last_login_time, invite_code, login_tel_type,login_type,last_login_ip, head_img, register_type, oils_balance, oils_recharge_balance, gas_balance, etc_balance, settle_quota, settle_balance, freezing_amount, amount_used, present_amount, total_recharge, total_loaning, total_settle, recharge_balance, loaning_balance, credit, integral, real_name, address, driver_auth_status, personal_auth_status, company_auth_status, car_owner_auth_status, shipper_auth_status, car_owner_issued_status, is_update, is_lsj_data, freezing_amount_withdrawals from m_member
     </sql>
 	
 
@@ -86,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                             <if test="lastLoginTime != null "> and last_login_time = #{lastLoginTime}</if>
                             <if test="inviteCode != null  and inviteCode != '' "> and invite_code = #{inviteCode}</if>
                             <if test="loginTelType != null "> and login_tel_type = #{loginTelType}</if>
+                            <if test="loginType != null "> and login_type = #{loginType}</if>
                             <if test="lastLoginIp != null  and lastLoginIp != '' "> and last_login_ip = #{lastLoginIp}</if>
                             <if test="headImg != null  and headImg != '' "> and head_img = #{headImg}</if>
                             <if test="registerType != null "> and register_type = #{registerType}</if>
@@ -140,6 +142,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="lastLoginTime != null  ">last_login_time,</if>
 			<if test="inviteCode != null  and inviteCode != ''  ">invite_code,</if>
 			<if test="loginTelType != null  ">login_tel_type,</if>
+			<if test="loginType != null ">login_type,</if>
 			<if test="lastLoginIp != null  and lastLoginIp != ''  ">last_login_ip,</if>
 			<if test="headImg != null  and headImg != ''  ">head_img,</if>
 			<if test="registerType != null  ">register_type,</if>
@@ -190,6 +193,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="lastLoginTime != null  ">#{lastLoginTime},</if>
 			<if test="inviteCode != null  and inviteCode != ''  ">#{inviteCode},</if>
 			<if test="loginTelType != null  ">#{loginTelType},</if>
+			<if test="loginType != null ">#{loginType},</if>
 			<if test="lastLoginIp != null  and lastLoginIp != ''  ">#{lastLoginIp},</if>
 			<if test="headImg != null  and headImg != ''  ">#{headImg},</if>
 			<if test="registerType != null  ">#{registerType},</if>
@@ -243,6 +247,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="lastLoginTime != null  ">last_login_time = #{lastLoginTime},</if>
             <if test="inviteCode != null  and inviteCode != ''  ">invite_code = #{inviteCode},</if>
             <if test="loginTelType != null  ">login_tel_type = #{loginTelType},</if>
+            <if test="loginType != null ">login_type = #{loginType},</if>
             <if test="lastLoginIp != null  and lastLoginIp != ''  ">last_login_ip = #{lastLoginIp},</if>
             <if test="headImg != null  and headImg != ''  ">head_img = #{headImg},</if>
             <if test="registerType != null  ">register_type = #{registerType},</if>
@@ -298,6 +303,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
            <if test="lastLoginTime != null  ">last_login_time = #{lastLoginTime},</if>
            <if test="inviteCode != null  and inviteCode != ''  ">invite_code = #{inviteCode},</if>
            <if test="loginTelType != null  ">login_tel_type = #{loginTelType},</if>
+           <if test="loginType != null ">login_type = #{loginType},</if>
            <if test="lastLoginIp != null  and lastLoginIp != ''  ">last_login_ip = #{lastLoginIp},</if>
            <if test="headImg != null  and headImg != ''  ">head_img = #{headImg},</if>
            <if test="registerType != null  ">register_type = #{registerType},</if>
@@ -344,5 +350,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
-    
+    <!--通过用户账号和注册类型查询用户信息  -->
+    <select id="selectByTelAndRegisterType" parameterType="String" resultMap="MMemberResult">
+    	select
+        <include refid="selectMMemberVo" />
+        FROM m_member m
+        where m.telephone = #{telephone,jdbcType=VARCHAR} and m.register_type=#{registerType}
+    </select>
+   
 </mapper>

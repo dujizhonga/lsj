@@ -3,6 +3,8 @@ package com.yrsoft.member.dao;
 import com.yrsoft.member.entity.MMember;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 /**
  * 会员管理-会员 数据层
  * 
@@ -58,5 +60,13 @@ public interface MMemberDao
      * @return 结果
      */
     public int deleteMMemberById(Map<String, Object> param);
+    /**
+     * 通过用户电话和注册类型查询用户信息 
+     * 
+     * @param telephone   电话号码
+     * @param registerType 注册类型
+     * @return 会员管理-会员信息
+     */
+	public List<MMember> selectByTelAndRegisterType(@Param("telephone") String telephone,@Param("registerType")Integer registerType);
 	
 }
