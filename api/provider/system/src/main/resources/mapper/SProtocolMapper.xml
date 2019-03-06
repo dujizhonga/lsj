@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.system.dao.SProtocolDao">
+
+    <resultMap type="com.yrsoft.system.entity.SProtocol" id="SProtocolResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="showSite"  column="show_site" javaType="Integer"/>
+    <result property="flag"  column="flag" javaType="Integer"/>
+    <result property="protocolCopy"  column="protocol_copy" javaType="String"/>
+    <result property="operatorId"  column="operator_id" javaType="String"/>
+    <result property="createTime"  column="create_time" javaType="Integer"/>
+    <result property="updateTime"  column="update_time" javaType="Integer"/>
+    <result property="status"  column="status" javaType="String"/>
+    <result property="deleteFlag"  column="delete_flag" javaType="Integer"/>
+    </resultMap>
+	
+	<sql id="selectSProtocolVo">
+        select id, show_site, flag, protocol_copy, operator_id, create_time, update_time, status, delete_flag from s_protocol
+    </sql>
+	
+
+    <select id="selectSProtocolById" parameterType="String" resultMap="SProtocolResult">
+        <include refid="selectSProtocolVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectSProtocolList" parameterType="SProtocol" resultMap="SProtocolResult">
+        <include refid="selectSProtocolVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="showSite != null "> and show_site = #{showSite}</if>
+                            <if test="flag != null "> and flag = #{flag}</if>
+                            <if test="protocolCopy != null  and protocolCopy != '' "> and protocol_copy = #{protocolCopy}</if>
+                            <if test="operatorId != null  and operatorId != '' "> and operator_id = #{operatorId}</if>
+                            <if test="createTime != null "> and create_time = #{createTime}</if>
+                            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+                            <if test="status != null  and status != '' "> and status = #{status}</if>
+                            <if test="deleteFlag != null "> and delete_flag = #{deleteFlag}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertSProtocol" parameterType="SProtocol">
+        insert into s_protocol
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="showSite != null  ">show_site,</if>
+			<if test="flag != null  ">flag,</if>
+			<if test="protocolCopy != null  and protocolCopy != ''  ">protocol_copy,</if>
+			<if test="operatorId != null  and operatorId != ''  ">operator_id,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="updateTime != null  ">update_time,</if>
+			<if test="status != null  and status != ''  ">status,</if>
+			<if test="deleteFlag != null  ">delete_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="showSite != null  ">#{showSite},</if>
+			<if test="flag != null  ">#{flag},</if>
+			<if test="protocolCopy != null  and protocolCopy != ''  ">#{protocolCopy},</if>
+			<if test="operatorId != null  and operatorId != ''  ">#{operatorId},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="status != null  and status != ''  ">#{status},</if>
+			<if test="deleteFlag != null  ">#{deleteFlag},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateSProtocol" parameterType="SProtocol">
+        update s_protocol
+       <set>
+            <if test="showSite != null  ">show_site = #{showSite},</if>
+            <if test="flag != null  ">flag = #{flag},</if>
+            <if test="protocolCopy != null  and protocolCopy != ''  ">protocol_copy = #{protocolCopy},</if>
+            <if test="operatorId != null  and operatorId != ''  ">operator_id = #{operatorId},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+            <if test="status != null  and status != ''  ">status = #{status},</if>
+            <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updateSProtocolByIds"  parameterType="java.util.Map">
+        UPDATE s_protocol
+        <set>
+           <if test="showSite != null  ">show_site = #{showSite},</if>
+           <if test="flag != null  ">flag = #{flag},</if>
+           <if test="protocolCopy != null  and protocolCopy != ''  ">protocol_copy = #{protocolCopy},</if>
+           <if test="operatorId != null  and operatorId != ''  ">operator_id = #{operatorId},</if>
+           <if test="createTime != null  ">create_time = #{createTime},</if>
+           <if test="updateTime != null  ">update_time = #{updateTime},</if>
+           <if test="status != null  and status != ''  ">status = #{status},</if>
+           <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deleteSProtocolByIds" parameterType="String">
+        delete from s_protocol where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

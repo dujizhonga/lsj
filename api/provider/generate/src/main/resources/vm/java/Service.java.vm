@@ -1,0 +1,56 @@
+package ${package}.service;
+
+import ${package}.entity.${className};
+import com.yrsoft.utils.JsonResult;
+import java.util.Map;
+
+/**
+ * ${tableComment} 服务层
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}Service
+{
+	/**
+     * 查询${tableComment}信息
+     * 
+     * @param ${primaryKey.attrname} ${tableComment}ID
+     * @return ${tableComment}信息
+     */
+	public JsonResult select${className}ById(${primaryKey.attrType} ${primaryKey.attrname});
+	
+	/**
+     * 查询${tableComment}列表
+	 * @param  开始页码
+     * @param  分页条数
+     * @param ${classname} ${tableComment}信息
+     * @return ${tableComment}集合
+     */
+	public JsonResult select${className}List(Integer page, Integer limit,Map<String,Object> param);
+	
+	/**
+     * 新增${tableComment}
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+	public JsonResult insert${className}(Map<String,Object> param);
+	
+	/**
+     * 修改${tableComment}
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+	public JsonResult update${className}(Map<String,Object> param);
+		
+	/**
+     * 删除${tableComment}信息
+     *
+     * @param ids 需要删除的数据ID
+     * @return 结果
+     */
+	public JsonResult delete${className}ByIds(String ids);
+
+}

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.platform.dao.PMarginRecordsDao">
+
+    <resultMap type="com.yrsoft.platform.entity.PMarginRecords" id="PMarginRecordsResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="invoiceId"  column="invoice_id" javaType="String"/>
+    <result property="payId"  column="pay_id" javaType="String"/>
+    <result property="marginAmount"  column="margin_amount" javaType="Long"/>
+    <result property="payWay"  column="pay_way" javaType="Integer"/>
+    <result property="payTime"  column="pay_time" javaType="Integer"/>
+    </resultMap>
+	
+	<sql id="selectPMarginRecordsVo">
+        select id, invoice_id, pay_id, margin_amount, pay_way, pay_time from p_margin_records
+    </sql>
+	
+
+    <select id="selectPMarginRecordsById" parameterType="String" resultMap="PMarginRecordsResult">
+        <include refid="selectPMarginRecordsVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectPMarginRecordsList" parameterType="PMarginRecords" resultMap="PMarginRecordsResult">
+        <include refid="selectPMarginRecordsVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="invoiceId != null  and invoiceId != '' "> and invoice_id = #{invoiceId}</if>
+                            <if test="payId != null  and payId != '' "> and pay_id = #{payId}</if>
+                            <if test="marginAmount != null "> and margin_amount = #{marginAmount}</if>
+                            <if test="payWay != null "> and pay_way = #{payWay}</if>
+                            <if test="payTime != null "> and pay_time = #{payTime}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertPMarginRecords" parameterType="PMarginRecords">
+        insert into p_margin_records
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="invoiceId != null  and invoiceId != ''  ">invoice_id,</if>
+			<if test="payId != null  and payId != ''  ">pay_id,</if>
+			<if test="marginAmount != null  ">margin_amount,</if>
+			<if test="payWay != null  ">pay_way,</if>
+			<if test="payTime != null  ">pay_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="invoiceId != null  and invoiceId != ''  ">#{invoiceId},</if>
+			<if test="payId != null  and payId != ''  ">#{payId},</if>
+			<if test="marginAmount != null  ">#{marginAmount},</if>
+			<if test="payWay != null  ">#{payWay},</if>
+			<if test="payTime != null  ">#{payTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePMarginRecords" parameterType="PMarginRecords">
+        update p_margin_records
+       <set>
+            <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+            <if test="payId != null  and payId != ''  ">pay_id = #{payId},</if>
+            <if test="marginAmount != null  ">margin_amount = #{marginAmount},</if>
+            <if test="payWay != null  ">pay_way = #{payWay},</if>
+            <if test="payTime != null  ">pay_time = #{payTime},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updatePMarginRecordsByIds"  parameterType="java.util.Map">
+        UPDATE p_margin_records
+        <set>
+           <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+           <if test="payId != null  and payId != ''  ">pay_id = #{payId},</if>
+           <if test="marginAmount != null  ">margin_amount = #{marginAmount},</if>
+           <if test="payWay != null  ">pay_way = #{payWay},</if>
+           <if test="payTime != null  ">pay_time = #{payTime},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deletePMarginRecordsByIds" parameterType="String">
+        delete from p_margin_records where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

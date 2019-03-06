@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.platform.dao.PAssignRecordDao">
+
+    <resultMap type="com.yrsoft.platform.entity.PAssignRecord" id="PAssignRecordResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="invoiceId"  column="invoice_id" javaType="String"/>
+    <result property="applyId"  column="apply_id" javaType="String"/>
+    <result property="carId"  column="car_id" javaType="String"/>
+    <result property="waybillType"  column="waybill_type" javaType="Integer"/>
+    <result property="waybillNum"  column="waybill_num" javaType="String"/>
+    <result property="createTime"  column="create_time" javaType="Integer"/>
+    <result property="isReceipt"  column="is_receipt" javaType="Integer"/>
+    <result property="overdueStatus"  column="overdue_status" javaType="Integer"/>
+    <result property="isAuto"  column="is_auto" javaType="Integer"/>
+    <result property="responseTime"  column="response_time" javaType="Integer"/>
+    <result property="deleteFlag"  column="delete_flag" javaType="Integer"/>
+    </resultMap>
+	
+	<sql id="selectPAssignRecordVo">
+        select id, invoice_id, apply_id, car_id, waybill_type, waybill_num, create_time, is_receipt, overdue_status, is_auto, response_time, delete_flag from p_assign_record
+    </sql>
+	
+
+    <select id="selectPAssignRecordById" parameterType="String" resultMap="PAssignRecordResult">
+        <include refid="selectPAssignRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectPAssignRecordList" parameterType="PAssignRecord" resultMap="PAssignRecordResult">
+        <include refid="selectPAssignRecordVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="invoiceId != null  and invoiceId != '' "> and invoice_id = #{invoiceId}</if>
+                            <if test="applyId != null  and applyId != '' "> and apply_id = #{applyId}</if>
+                            <if test="carId != null  and carId != '' "> and car_id = #{carId}</if>
+                            <if test="waybillType != null "> and waybill_type = #{waybillType}</if>
+                            <if test="waybillNum != null  and waybillNum != '' "> and waybill_num = #{waybillNum}</if>
+                            <if test="createTime != null "> and create_time = #{createTime}</if>
+                            <if test="isReceipt != null "> and is_receipt = #{isReceipt}</if>
+                            <if test="overdueStatus != null "> and overdue_status = #{overdueStatus}</if>
+                            <if test="isAuto != null "> and is_auto = #{isAuto}</if>
+                            <if test="responseTime != null "> and response_time = #{responseTime}</if>
+                            <if test="deleteFlag != null "> and delete_flag = #{deleteFlag}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertPAssignRecord" parameterType="PAssignRecord">
+        insert into p_assign_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="invoiceId != null  and invoiceId != ''  ">invoice_id,</if>
+			<if test="applyId != null  and applyId != ''  ">apply_id,</if>
+			<if test="carId != null  and carId != ''  ">car_id,</if>
+			<if test="waybillType != null  ">waybill_type,</if>
+			<if test="waybillNum != null  and waybillNum != ''  ">waybill_num,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="isReceipt != null  ">is_receipt,</if>
+			<if test="overdueStatus != null  ">overdue_status,</if>
+			<if test="isAuto != null  ">is_auto,</if>
+			<if test="responseTime != null  ">response_time,</if>
+			<if test="deleteFlag != null  ">delete_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="invoiceId != null  and invoiceId != ''  ">#{invoiceId},</if>
+			<if test="applyId != null  and applyId != ''  ">#{applyId},</if>
+			<if test="carId != null  and carId != ''  ">#{carId},</if>
+			<if test="waybillType != null  ">#{waybillType},</if>
+			<if test="waybillNum != null  and waybillNum != ''  ">#{waybillNum},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="isReceipt != null  ">#{isReceipt},</if>
+			<if test="overdueStatus != null  ">#{overdueStatus},</if>
+			<if test="isAuto != null  ">#{isAuto},</if>
+			<if test="responseTime != null  ">#{responseTime},</if>
+			<if test="deleteFlag != null  ">#{deleteFlag},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePAssignRecord" parameterType="PAssignRecord">
+        update p_assign_record
+       <set>
+            <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+            <if test="applyId != null  and applyId != ''  ">apply_id = #{applyId},</if>
+            <if test="carId != null  and carId != ''  ">car_id = #{carId},</if>
+            <if test="waybillType != null  ">waybill_type = #{waybillType},</if>
+            <if test="waybillNum != null  and waybillNum != ''  ">waybill_num = #{waybillNum},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="isReceipt != null  ">is_receipt = #{isReceipt},</if>
+            <if test="overdueStatus != null  ">overdue_status = #{overdueStatus},</if>
+            <if test="isAuto != null  ">is_auto = #{isAuto},</if>
+            <if test="responseTime != null  ">response_time = #{responseTime},</if>
+            <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updatePAssignRecordByIds"  parameterType="java.util.Map">
+        UPDATE p_assign_record
+        <set>
+           <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+           <if test="applyId != null  and applyId != ''  ">apply_id = #{applyId},</if>
+           <if test="carId != null  and carId != ''  ">car_id = #{carId},</if>
+           <if test="waybillType != null  ">waybill_type = #{waybillType},</if>
+           <if test="waybillNum != null  and waybillNum != ''  ">waybill_num = #{waybillNum},</if>
+           <if test="createTime != null  ">create_time = #{createTime},</if>
+           <if test="isReceipt != null  ">is_receipt = #{isReceipt},</if>
+           <if test="overdueStatus != null  ">overdue_status = #{overdueStatus},</if>
+           <if test="isAuto != null  ">is_auto = #{isAuto},</if>
+           <if test="responseTime != null  ">response_time = #{responseTime},</if>
+           <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deletePAssignRecordByIds" parameterType="String">
+        delete from p_assign_record where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

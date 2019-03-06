@@ -1,0 +1,9 @@
+url:
+  auth: http://10.247.83.162:8081/provider/
+  member: http://10.247.52.219:8082/provider/
+  operate: http://10.247.8.248:8083/provider/
+  platform: http://10.247.194.79:8084/provider/
+  position: http://10.247.195.53:8085/provider/
+  system: http://10.247.183.115:8086/provider/
+  website: http://10.247.235.66:8087/provider/
+  finance: http://10.247.163.195:8089/provider/

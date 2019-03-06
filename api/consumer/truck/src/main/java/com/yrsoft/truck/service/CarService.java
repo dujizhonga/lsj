@@ -1,0 +1,20 @@
+package com.yrsoft.truck.service;
+import com.yrsoft.common.utils.JsonResult;
+
+/**
+ * 查询所有自有车位置及基本信息
+ * @author yxq
+ * @date 2019/2/25 
+ */ 
+public interface CarService {
+
+    
+	/**
+     * 通过货主id查询自有车位置及基本信息
+     *
+     * @param param
+     * @return 结果
+     */
+	public JsonResult selectCarByShipperId(String paramStr);
+	
+}

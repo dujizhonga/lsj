@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.platform.dao.PBohaiInsuranceLogDao">
+
+    <resultMap type="com.yrsoft.platform.entity.PBohaiInsuranceLog" id="PBohaiInsuranceLogResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="orderCode"  column="order_code" javaType="String"/>
+    <result property="memberId"  column="member_id" javaType="String"/>
+    <result property="insurancStep1Xml"  column="insuranc_step1_xml" javaType="String"/>
+    <result property="insurancStep2Xml"  column="insuranc_step2_xml" javaType="String"/>
+    <result property="insuranceStep1Status"  column="insurance_step1_status" javaType="Integer"/>
+    <result property="insuranceStep2Status"  column="insurance_step2_status" javaType="Integer"/>
+    </resultMap>
+	
+	<sql id="selectPBohaiInsuranceLogVo">
+        select id, order_code, member_id, insuranc_step1_xml, insuranc_step2_xml, insurance_step1_status, insurance_step2_status from p_bohai_insurance_log
+    </sql>
+	
+
+    <select id="selectPBohaiInsuranceLogById" parameterType="String" resultMap="PBohaiInsuranceLogResult">
+        <include refid="selectPBohaiInsuranceLogVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectPBohaiInsuranceLogList" parameterType="PBohaiInsuranceLog" resultMap="PBohaiInsuranceLogResult">
+        <include refid="selectPBohaiInsuranceLogVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="orderCode != null  and orderCode != '' "> and order_code = #{orderCode}</if>
+                            <if test="memberId != null  and memberId != '' "> and member_id = #{memberId}</if>
+                            <if test="insurancStep1Xml != null  and insurancStep1Xml != '' "> and insuranc_step1_xml = #{insurancStep1Xml}</if>
+                            <if test="insurancStep2Xml != null  and insurancStep2Xml != '' "> and insuranc_step2_xml = #{insurancStep2Xml}</if>
+                            <if test="insuranceStep1Status != null "> and insurance_step1_status = #{insuranceStep1Status}</if>
+                            <if test="insuranceStep2Status != null "> and insurance_step2_status = #{insuranceStep2Status}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertPBohaiInsuranceLog" parameterType="PBohaiInsuranceLog">
+        insert into p_bohai_insurance_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="orderCode != null  and orderCode != ''  ">order_code,</if>
+			<if test="memberId != null  and memberId != ''  ">member_id,</if>
+			<if test="insurancStep1Xml != null  and insurancStep1Xml != ''  ">insuranc_step1_xml,</if>
+			<if test="insurancStep2Xml != null  and insurancStep2Xml != ''  ">insuranc_step2_xml,</if>
+			<if test="insuranceStep1Status != null  ">insurance_step1_status,</if>
+			<if test="insuranceStep2Status != null  ">insurance_step2_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="orderCode != null  and orderCode != ''  ">#{orderCode},</if>
+			<if test="memberId != null  and memberId != ''  ">#{memberId},</if>
+			<if test="insurancStep1Xml != null  and insurancStep1Xml != ''  ">#{insurancStep1Xml},</if>
+			<if test="insurancStep2Xml != null  and insurancStep2Xml != ''  ">#{insurancStep2Xml},</if>
+			<if test="insuranceStep1Status != null  ">#{insuranceStep1Status},</if>
+			<if test="insuranceStep2Status != null  ">#{insuranceStep2Status},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePBohaiInsuranceLog" parameterType="PBohaiInsuranceLog">
+        update p_bohai_insurance_log
+       <set>
+            <if test="orderCode != null  and orderCode != ''  ">order_code = #{orderCode},</if>
+            <if test="memberId != null  and memberId != ''  ">member_id = #{memberId},</if>
+            <if test="insurancStep1Xml != null  and insurancStep1Xml != ''  ">insuranc_step1_xml = #{insurancStep1Xml},</if>
+            <if test="insurancStep2Xml != null  and insurancStep2Xml != ''  ">insuranc_step2_xml = #{insurancStep2Xml},</if>
+            <if test="insuranceStep1Status != null  ">insurance_step1_status = #{insuranceStep1Status},</if>
+            <if test="insuranceStep2Status != null  ">insurance_step2_status = #{insuranceStep2Status},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updatePBohaiInsuranceLogByIds"  parameterType="java.util.Map">
+        UPDATE p_bohai_insurance_log
+        <set>
+           <if test="orderCode != null  and orderCode != ''  ">order_code = #{orderCode},</if>
+           <if test="memberId != null  and memberId != ''  ">member_id = #{memberId},</if>
+           <if test="insurancStep1Xml != null  and insurancStep1Xml != ''  ">insuranc_step1_xml = #{insurancStep1Xml},</if>
+           <if test="insurancStep2Xml != null  and insurancStep2Xml != ''  ">insuranc_step2_xml = #{insurancStep2Xml},</if>
+           <if test="insuranceStep1Status != null  ">insurance_step1_status = #{insuranceStep1Status},</if>
+           <if test="insuranceStep2Status != null  ">insurance_step2_status = #{insuranceStep2Status},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deletePBohaiInsuranceLogByIds" parameterType="String">
+        delete from p_bohai_insurance_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

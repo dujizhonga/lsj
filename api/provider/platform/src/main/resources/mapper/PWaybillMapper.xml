@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.platform.dao.PWaybillDao">
+
+   <!--  <resultMap type="com.yrsoft.platform.entity.PWaybill" id="PWaybillResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="waybillNumber"  column="waybill_number" javaType="String"/>
+    <result property="invoiceId"  column="invoice_id" javaType="String"/>
+    <result property="carId"  column="car_id" javaType="String"/>
+    <result property="ownerId"  column="owner_id" javaType="String"/>
+    <result property="freightId"  column="freight_id" javaType="String"/>
+    <result property="insuranceId"  column="insurance_id" javaType="String"/>
+    <result property="advanceFreight"  column="advance_freight" javaType="Long"/>
+    <result property="actualFreight"  column="actual_freight" javaType="Long"/>
+    <result property="freightConfirmer"  column="freight_confirmer" javaType="String"/>
+    <result property="freightConfirmationTime"  column="freight_confirmation_time" javaType="Integer"/>
+    <result property="freightConfirmationOpinion"  column="freight_confirmation_opinion" javaType="String"/>
+    <result property="modifyCause"  column="modify_cause" javaType="String"/>
+    <result property="poundsImg1"  column="pounds_img1" javaType="String"/>
+    <result property="poundsImg2"  column="pounds_img2" javaType="String"/>
+    <result property="poundsNum1"  column="pounds_num1" javaType="String"/>
+    <result property="poundsNum2"  column="pounds_num2" javaType="String"/>
+    <result property="createTime"  column="create_time" javaType="Integer"/>
+    <result property="deliveryTime"  column="delivery_time" javaType="Integer"/>
+    <result property="deliveryGoodsTime"  column="delivery_goods_time" javaType="Integer"/>
+    <result property="confirmReceiptTime"  column="confirm_receipt_time" javaType="Integer"/>
+    <result property="flag"  column="flag" javaType="Integer"/>
+    <result property="isCancel"  column="is_cancel" javaType="Integer"/>
+    <result property="waybillState"  column="waybill_state" javaType="Integer"/>
+    <result property="storedState"  column="stored_state" javaType="Integer"/>
+    <result property="freightPayState"  column="freight_pay_state" javaType="Integer"/>
+    <result property="freightPayWay"  column="freight_pay_way" javaType="Integer"/>
+    <result property="insurancePayState"  column="insurance_pay_state" javaType="Integer"/>
+    <result property="isComments"  column="is_comments" javaType="Integer"/>
+    <result property="star"  column="star" javaType="String"/>
+    <result property="comment"  column="comment" javaType="String"/>
+    <result property="evaluateOptions"  column="evaluate_options" javaType="String"/>
+    <result property="receiptStatus"  column="receipt_status" javaType="Integer"/>
+    <result property="deleteFlag"  column="delete_flag" javaType="Integer"/>
+    </resultMap> -->
+    
+	<resultMap type="com.yrsoft.platform.entity.PWaybill" id="PWaybillResult">
+	    <result property="id"  column="id" javaType="String"/>
+	    <result property="waybillNumber"  column="waybill_number" javaType="String"/>
+	    <result property="invoiceId"  column="invoice_id" javaType="String"/>
+	    <result property="ownerId"  column="owner_id" javaType="String"/>
+	    <result property="carId"  column="car_id" javaType="String"/>
+	    <result property="freightId"  column="freight_id" javaType="String"/>
+	    <result property="insuranceId"  column="insurance_id" javaType="String"/>
+	    <result property="advanceFreight"  column="advance_freight" javaType="Long"/>
+	    <result property="actualFreight"  column="actual_freight" javaType="Long"/>
+	    <result property="freightConfirmer"  column="freight_confirmer" javaType="String"/>
+	    <result property="freightConfirmationTime"  column="freight_confirmation_time" javaType="Integer"/>
+	    <result property="freightConfirmationOpinion"  column="freight_confirmation_opinion" javaType="String"/>
+	    <result property="modifyCause"  column="modify_cause" javaType="String"/>
+	    <result property="poundsImg1"  column="pounds_img1" javaType="String"/>
+	    <result property="poundsImg2"  column="pounds_img2" javaType="String"/>
+	    <result property="poundsNum1"  column="pounds_num1" javaType="String"/>
+	    <result property="poundsNum2"  column="pounds_num2" javaType="String"/>
+	    <result property="createTime"  column="create_time" javaType="Integer"/>
+	    <result property="deliveryTime"  column="delivery_time" javaType="Integer"/>
+	    <result property="deliveryGoodsTime"  column="delivery_goods_time" javaType="Integer"/>
+	    <result property="confirmReceiptTime"  column="confirm_receipt_time" javaType="Integer"/>
+	    <result property="flag"  column="flag" javaType="Integer"/>
+	    <result property="isCancel"  column="is_cancel" javaType="Integer"/>
+	    <result property="waybillState"  column="waybill_state" javaType="Integer"/>
+	    <result property="storedState"  column="stored_state" javaType="Integer"/>
+	    <result property="freightPayState"  column="freight_pay_state" javaType="Integer"/>
+	    <result property="freightPayWay"  column="freight_pay_way" javaType="Integer"/>
+	    <result property="insurancePayState"  column="insurance_pay_state" javaType="Integer"/>
+	    <result property="isComments"  column="is_comments" javaType="Integer"/>
+	    <result property="star"  column="star" javaType="Integer"/>
+	    <result property="comment"  column="comment" javaType="String"/>
+	    <result property="evaluateOptions"  column="evaluate_options" javaType="String"/>
+	    <result property="receiptStatus"  column="receipt_status" javaType="Integer"/>
+	    <result property="deleteFlag"  column="delete_flag" javaType="Integer"/>
+    </resultMap>
+    
+	<!-- <sql id="selectPWaybillVo">
+		SELECT
+			pw.id,
+			pw.waybill_number,
+			pw.invoice_id,
+			pw.car_id,
+			pw.freight_id,
+			pw.insurance_id,
+			pw.advance_freight,
+			pw.actual_freight,
+			pw.freight_confirmer,
+			pw.freight_confirmation_time,
+			pw.freight_confirmation_opinion,
+			pw.modify_cause,
+			pw.pounds_img1,
+			pw.pounds_img2,
+			pw.pounds_num1,
+			pw.pounds_num2,
+			pw.create_time,
+			pw.delivery_time,
+			pw.delivery_goods_time,
+			pw.confirm_receipt_time,
+			pw.flag,
+			pw.is_cancel,
+			pw.waybill_state,
+			pw.stored_state,
+			pw.freight_pay_state,
+			pw.freight_pay_way,
+			pw.insurance_pay_state,
+			pw.is_comments,
+			pw.star,
+			pw.COMMENT,
+			pw.evaluate_options,
+			pw.receipt_status,
+			pw.delete_flag,
+			pw.owner_id
+		FROM p_waybill pw
+    </sql> -->
+	<sql id="selectPWaybillVo">
+        select id, waybill_number, invoice_id, owner_id, car_id, freight_id, insurance_id, advance_freight, actual_freight, freight_confirmer, freight_confirmation_time, freight_confirmation_opinion, modify_cause, pounds_img1, pounds_img2, pounds_num1, pounds_num2, create_time, delivery_time, delivery_goods_time, confirm_receipt_time, flag, is_cancel, waybill_state, stored_state, freight_pay_state, freight_pay_way, insurance_pay_state, is_comments, star, comment, evaluate_options, receipt_status, delete_flag from p_waybill
+    </sql>
+
+    <select id="selectPWaybillById" parameterType="String" resultMap="PWaybillResult">
+        <include refid="selectPWaybillVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectWaybillById" parameterType="String"
+		resultType="com.yrsoft.platform.entity.PWaybill">
+		select 
+		pw.id,
+		pw.waybill_number as waybillNumber,
+		pw.invoice_id as invoiceId,
+		pw.car_id AS carId,
+		pw.freight_id AS freightId,
+		pw.insurance_id AS insuranceId,
+		pw.advance_freight AS advanceFreight,
+		pw.actual_freight AS actualFreight,
+		pw.freight_confirmer AS freightConfirmer,
+		pw.freight_confirmation_time AS freightConfirmationTime,
+		pw.freight_confirmation_opinion AS freightConfirmationOpinion,
+		pw.modify_cause AS modifyCause,
+		pw.pounds_img1 AS poundsImg1,
+		pw.pounds_img2 AS poundsImg2,
+		pw.pounds_num1 AS poundsNum1,
+		pw.pounds_num2 AS poundsNum2,
+		pw.create_time AS createTime,
+		pw.delivery_time AS deliveryTime,
+		pw.delivery_goods_time AS deliveryGoodsTime,
+		pw.confirm_receipt_time AS confirmReceiptTime,
+		pw.flag AS flag,
+		pw.is_cancel AS isCancel,
+		pw.waybill_state AS waybillState,
+		pw.stored_state AS storedState,
+		pw.freight_pay_state AS freightPayState,
+		pw.freight_pay_way AS freightPyWay,
+		pw.insurance_pay_state AS insurancePayState,
+	 	<!-- pw.is_comments AS isComments,
+	 	pw.star AS star, -->
+		pw.comment AS comment,
+		pw.evaluate_options AS evaluateOptions,
+		pw.receipt_status AS receiptStatus,
+		pw.delete_flag AS deleteFlag
+		from p_waybill pw
+		where id = #{id}
+	</select>
+	
+	<select id="selectPWaybillList" parameterType="PWaybill" resultMap="PWaybillResult">
+        <include refid="selectPWaybillVo"/>
+        <where>
+            <if test="id != null  and id != '' "> and id = #{id}</if>
+            <if test="waybillNumber != null  and waybillNumber != '' "> and waybill_number = #{waybillNumber}</if>
+            <if test="invoiceId != null  and invoiceId != '' "> and invoice_id = #{invoiceId}</if>
+            <if test="ownerId != null  and ownerId != '' "> and owner_id = #{ownerId}</if>
+            <if test="carId != null  and carId != '' "> and car_id = #{carId}</if>
+            <if test="freightId != null  and freightId != '' "> and freight_id = #{freightId}</if>
+            <if test="insuranceId != null  and insuranceId != '' "> and insurance_id = #{insuranceId}</if>
+            <if test="advanceFreight != null "> and advance_freight = #{advanceFreight}</if>
+            <if test="actualFreight != null "> and actual_freight = #{actualFreight}</if>
+            <if test="freightConfirmer != null  and freightConfirmer != '' "> and freight_confirmer = #{freightConfirmer}</if>
+            <if test="freightConfirmationTime != null "> and freight_confirmation_time = #{freightConfirmationTime}</if>
+            <if test="freightConfirmationOpinion != null  and freightConfirmationOpinion != '' "> and freight_confirmation_opinion = #{freightConfirmationOpinion}</if>
+            <if test="modifyCause != null  and modifyCause != '' "> and modify_cause = #{modifyCause}</if>
+            <if test="poundsImg1 != null  and poundsImg1 != '' "> and pounds_img1 = #{poundsImg1}</if>
+            <if test="poundsImg2 != null  and poundsImg2 != '' "> and pounds_img2 = #{poundsImg2}</if>
+            <if test="poundsNum1 != null  and poundsNum1 != '' "> and pounds_num1 = #{poundsNum1}</if>
+            <if test="poundsNum2 != null  and poundsNum2 != '' "> and pounds_num2 = #{poundsNum2}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="deliveryTime != null "> and delivery_time = #{deliveryTime}</if>
+            <if test="deliveryGoodsTime != null "> and delivery_goods_time = #{deliveryGoodsTime}</if>
+            <if test="confirmReceiptTime != null "> and confirm_receipt_time = #{confirmReceiptTime}</if>
+            <if test="flag != null "> and flag = #{flag}</if>
+            <if test="isCancel != null "> and is_cancel = #{isCancel}</if>
+            <if test="waybillState != null "> and waybill_state = #{waybillState}</if>
+            <if test="storedState != null "> and stored_state = #{storedState}</if>
+            <if test="freightPayState != null "> and freight_pay_state = #{freightPayState}</if>
+            <if test="freightPayWay != null "> and freight_pay_way = #{freightPayWay}</if>
+            <if test="insurancePayState != null "> and insurance_pay_state = #{insurancePayState}</if>
+            <if test="isComments != null "> and is_comments = #{isComments}</if>
+            <if test="star != null "> and star = #{star}</if>
+            <if test="comment != null  and comment != '' "> and comment = #{comment}</if>
+            <if test="evaluateOptions != null  and evaluateOptions != '' "> and evaluate_options = #{evaluateOptions}</if>
+            <if test="receiptStatus != null "> and receipt_status = #{receiptStatus}</if>
+            <if test="deleteFlag != null "> and delete_flag = #{deleteFlag}</if>
+       </where>
+    </select>  
+     
+    <select id="selectListCount" parameterType="PWaybill" resultType="java.lang.Integer">
+        select count(id) from p_waybill
+        <where>
+            <if test="id != null  and id != '' "> and id = #{id}</if>
+            <if test="waybillNumber != null  and waybillNumber != '' "> and waybill_number = #{waybillNumber}</if>
+            <if test="invoiceId != null  and invoiceId != '' "> and invoice_id = #{invoiceId}</if>
+            <if test="ownerId != null  and ownerId != '' "> and owner_id = #{ownerId}</if>
+            <if test="carId != null  and carId != '' "> and car_id = #{carId}</if>
+            <if test="freightId != null  and freightId != '' "> and freight_id = #{freightId}</if>
+            <if test="insuranceId != null  and insuranceId != '' "> and insurance_id = #{insuranceId}</if>
+            <if test="advanceFreight != null "> and advance_freight = #{advanceFreight}</if>
+            <if test="actualFreight != null "> and actual_freight = #{actualFreight}</if>
+            <if test="freightConfirmer != null  and freightConfirmer != '' "> and freight_confirmer = #{freightConfirmer}</if>
+            <if test="freightConfirmationTime != null "> and freight_confirmation_time = #{freightConfirmationTime}</if>
+            <if test="freightConfirmationOpinion != null  and freightConfirmationOpinion != '' "> and freight_confirmation_opinion = #{freightConfirmationOpinion}</if>
+            <if test="modifyCause != null  and modifyCause != '' "> and modify_cause = #{modifyCause}</if>
+            <if test="poundsImg1 != null  and poundsImg1 != '' "> and pounds_img1 = #{poundsImg1}</if>
+            <if test="poundsImg2 != null  and poundsImg2 != '' "> and pounds_img2 = #{poundsImg2}</if>
+            <if test="poundsNum1 != null  and poundsNum1 != '' "> and pounds_num1 = #{poundsNum1}</if>
+            <if test="poundsNum2 != null  and poundsNum2 != '' "> and pounds_num2 = #{poundsNum2}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="deliveryTime != null "> and delivery_time = #{deliveryTime}</if>
+            <if test="deliveryGoodsTime != null "> and delivery_goods_time = #{deliveryGoodsTime}</if>
+            <if test="confirmReceiptTime != null "> and confirm_receipt_time = #{confirmReceiptTime}</if>
+            <if test="flag != null "> and flag = #{flag}</if>
+            <if test="isCancel != null "> and is_cancel = #{isCancel}</if>
+            <if test="waybillState != null "> and waybill_state = #{waybillState}</if>
+            <if test="storedState != null "> and stored_state = #{storedState}</if>
+            <if test="freightPayState != null "> and freight_pay_state = #{freightPayState}</if>
+            <if test="freightPayWay != null "> and freight_pay_way = #{freightPayWay}</if>
+            <if test="insurancePayState != null "> and insurance_pay_state = #{insurancePayState}</if>
+            <if test="isComments != null "> and is_comments = #{isComments}</if>
+            <if test="star != null "> and star = #{star}</if>
+            <if test="comment != null  and comment != '' "> and comment = #{comment}</if>
+            <if test="evaluateOptions != null  and evaluateOptions != '' "> and evaluate_options = #{evaluateOptions}</if>
+            <if test="receiptStatus != null "> and receipt_status = #{receiptStatus}</if>
+            <if test="deleteFlag != null "> and delete_flag = #{deleteFlag}</if>
+       </where>
+    </select>
+
+  <!--   <select id="selectPWaybillList" parameterType="PWaybill" resultMap="PWaybillResult">
+      <include refid="selectPWaybillVo"/>
+        <where>
+          <if test="id != null  and id != '' "> and pw.id = #{id}</if>
+          <if test="waybillNumber != null  and waybillNumber != '' "> and pw.waybill_number = #{waybillNumber}</if>
+          <if test="invoiceId != null  and invoiceId != '' "> and pw.invoice_id = #{invoiceId}</if>
+          <if test="carId != null  and carId != '' "> and pw.car_id = #{carId}</if>
+          <if test="freightId != null  and freightId != '' "> and pw.freight_id = #{freightId}</if>
+          <if test="insuranceId != null  and insuranceId != '' "> and pw.insurance_id = #{insuranceId}</if>
+          <if test="advanceFreight != null "> and pw.advance_freight = #{advanceFreight}</if>
+          <if test="actualFreight != null "> and pw.actual_freight = #{actualFreight}</if>
+          <if test="freightConfirmer != null  and freightConfirmer != '' "> and pw.freight_confirmer = #{freightConfirmer}</if>
+          <if test="freightConfirmationTime != null "> and pw.freight_confirmation_time = #{freightConfirmationTime}</if>
+          <if test="freightConfirmationOpinion != null  and freightConfirmationOpinion != '' "> and pw.freight_confirmation_opinion = #{freightConfirmationOpinion}</if>
+          <if test="modifyCause != null  and modifyCause != '' "> and pw.modify_cause = #{modifyCause}</if>
+          <if test="poundsImg1 != null  and poundsImg1 != '' "> and pw.pounds_img1 = #{poundsImg1}</if>
+          <if test="poundsImg2 != null  and poundsImg2 != '' "> and pw.pounds_img2 = #{poundsImg2}</if>
+          <if test="poundsNum1 != null  and poundsNum1 != '' "> and pw.pounds_num1 = #{poundsNum1}</if>
+          <if test="poundsNum2 != null  and poundsNum2 != '' "> and pw.pounds_num2 = #{poundsNum2}</if>
+          <if test="createTime != null "> and pw.create_time = #{createTime}</if>
+          <if test="deliveryTime != null "> and pw.delivery_time &gt;= #{deliveryTime}</if>
+          <if test="deliveryGoodsTime != null "> and pw.delivery_goods_time = #{deliveryGoodsTime}</if>
+          <if test="confirmReceiptTime != null "> and pw.confirm_receipt_time &lt;= #{confirmReceiptTime}</if>
+          <if test="flag != null "> and pw.flag = #{flag}</if>
+          <if test="isCancel != null "> and pw.is_cancel = #{isCancel}</if>
+          <if test="waybillState != null "> and pw.waybill_state = #{waybillState}</if>
+          <if test="storedState != null "> and pw.stored_state = #{storedState}</if>
+          <if test="freightPayState != null "> and pw.freight_pay_state = #{freightPayState}</if>
+          <if test="freightPayWay != null "> and pw.freight_pay_way = #{freightPayWay}</if>
+          <if test="insurancePayState != null "> and pw.insurance_pay_state = #{insurancePayState}</if>
+          <if test="isComments != null "> and pw.is_comments = #{isComments}</if>
+          <if test="star != null "> and pw.star = #{star}</if>
+          <if test="comment != null  and comment != '' "> and pw.comment = #{comment}</if>
+          <if test="evaluateOptions != null  and evaluateOptions != '' "> and pw.evaluate_options = #{evaluateOptions}</if>
+          <if test="receiptStatus != null "> and pw.receipt_status = #{receiptStatus}</if>
+          <if test="deleteFlag != null "> and pw.delete_flag = #{deleteFlag}</if>
+       </where>
+    </select> -->
+        
+    <insert id="insertPWaybill" parameterType="PWaybill">
+        insert into p_waybill
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="waybillNumber != null  and waybillNumber != ''  ">waybill_number,</if>
+			<if test="invoiceId != null  and invoiceId != ''  ">invoice_id,</if>
+			<if test="carId != null  and carId != ''  ">car_id,</if>
+			<if test="freightId != null  and freightId != ''  ">freight_id,</if>
+			<if test="insuranceId != null  and insuranceId != ''  ">insurance_id,</if>
+			<if test="advanceFreight != null  ">advance_freight,</if>
+			<if test="actualFreight != null  ">actual_freight,</if>
+			<if test="freightConfirmer != null  and freightConfirmer != ''  ">freight_confirmer,</if>
+			<if test="freightConfirmationTime != null  ">freight_confirmation_time,</if>
+			<if test="freightConfirmationOpinion != null  and freightConfirmationOpinion != ''  ">freight_confirmation_opinion,</if>
+			<if test="modifyCause != null  and modifyCause != ''  ">modify_cause,</if>
+			<if test="poundsImg1 != null  and poundsImg1 != ''  ">pounds_img1,</if>
+			<if test="poundsImg2 != null  and poundsImg2 != ''  ">pounds_img2,</if>
+			<if test="poundsNum1 != null  and poundsNum1 != ''  ">pounds_num1,</if>
+			<if test="poundsNum2 != null  and poundsNum2 != ''  ">pounds_num2,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="deliveryTime != null  ">delivery_time,</if>
+			<if test="deliveryGoodsTime != null  ">delivery_goods_time,</if>
+			<if test="confirmReceiptTime != null  ">confirm_receipt_time,</if>
+			<if test="flag != null  ">flag,</if>
+			<if test="isCancel != null  ">is_cancel,</if>
+			<if test="waybillState != null  ">waybill_state,</if>
+			<if test="storedState != null  ">stored_state,</if>
+			<if test="freightPayState != null  ">freight_pay_state,</if>
+			<if test="freightPayWay != null  ">freight_pay_way,</if>
+			<if test="insurancePayState != null  ">insurance_pay_state,</if>
+			<if test="isComments != null  ">is_comments,</if>
+			<if test="star != null  ">star,</if>
+			<if test="comment != null  and comment != ''  ">comment,</if>
+			<if test="evaluateOptions != null  and evaluateOptions != ''  ">evaluate_options,</if>
+			<if test="receiptStatus != null  ">receipt_status,</if>
+			<if test="deleteFlag != null  ">delete_flag,</if>
+			<if test="ownerId != null  ">owner_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="waybillNumber != null  and waybillNumber != ''  ">#{waybillNumber},</if>
+			<if test="invoiceId != null  and invoiceId != ''  ">#{invoiceId},</if>
+			<if test="carId != null  and carId != ''  ">#{carId},</if>
+			<if test="freightId != null  and freightId != ''  ">#{freightId},</if>
+			<if test="insuranceId != null  and insuranceId != ''  ">#{insuranceId},</if>
+			<if test="advanceFreight != null  ">#{advanceFreight},</if>
+			<if test="actualFreight != null  ">#{actualFreight},</if>
+			<if test="freightConfirmer != null  and freightConfirmer != ''  ">#{freightConfirmer},</if>
+			<if test="freightConfirmationTime != null  ">#{freightConfirmationTime},</if>
+			<if test="freightConfirmationOpinion != null  and freightConfirmationOpinion != ''  ">#{freightConfirmationOpinion},</if>
+			<if test="modifyCause != null  and modifyCause != ''  ">#{modifyCause},</if>
+			<if test="poundsImg1 != null  and poundsImg1 != ''  ">#{poundsImg1},</if>
+			<if test="poundsImg2 != null  and poundsImg2 != ''  ">#{poundsImg2},</if>
+			<if test="poundsNum1 != null  and poundsNum1 != ''  ">#{poundsNum1},</if>
+			<if test="poundsNum2 != null  and poundsNum2 != ''  ">#{poundsNum2},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="deliveryTime != null  ">#{deliveryTime},</if>
+			<if test="deliveryGoodsTime != null  ">#{deliveryGoodsTime},</if>
+			<if test="confirmReceiptTime != null  ">#{confirmReceiptTime},</if>
+			<if test="flag != null  ">#{flag},</if>
+			<if test="isCancel != null  ">#{isCancel},</if>
+			<if test="waybillState != null  ">#{waybillState},</if>
+			<if test="storedState != null  ">#{storedState},</if>
+			<if test="freightPayState != null  ">#{freightPayState},</if>
+			<if test="freightPayWay != null  ">#{freightPayWay},</if>
+			<if test="insurancePayState != null  ">#{insurancePayState},</if>
+			<if test="isComments != null  ">#{isComments},</if>
+			<if test="star != null  ">#{star},</if>
+			<if test="comment != null  and comment != ''  ">#{comment},</if>
+			<if test="evaluateOptions != null  and evaluateOptions != ''  ">#{evaluateOptions},</if>
+			<if test="receiptStatus != null  ">#{receiptStatus},</if>
+			<if test="deleteFlag != null  ">#{deleteFlag},</if>
+			<if test="ownerId != null  ">#{ownerId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePWaybill" parameterType="PWaybill">
+        update p_waybill
+       <set>
+            <if test="waybillNumber != null  and waybillNumber != ''  ">waybill_number = #{waybillNumber},</if>
+            <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+            <if test="carId != null  and carId != ''  ">car_id = #{carId},</if>
+            <if test="freightId != null  and freightId != ''  ">freight_id = #{freightId},</if>
+            <if test="insuranceId != null  and insuranceId != ''  ">insurance_id = #{insuranceId},</if>
+            <if test="advanceFreight != null  ">advance_freight = #{advanceFreight},</if>
+            <if test="actualFreight != null  ">actual_freight = #{actualFreight},</if>
+            <if test="freightConfirmer != null  and freightConfirmer != ''  ">freight_confirmer = #{freightConfirmer},</if>
+            <if test="freightConfirmationTime != null  ">freight_confirmation_time = #{freightConfirmationTime},</if>
+            <if test="freightConfirmationOpinion != null  and freightConfirmationOpinion != ''  ">freight_confirmation_opinion = #{freightConfirmationOpinion},</if>
+            <if test="modifyCause != null  and modifyCause != ''  ">modify_cause = #{modifyCause},</if>
+            <if test="poundsImg1 != null  and poundsImg1 != ''  ">pounds_img1 = #{poundsImg1},</if>
+            <if test="poundsImg2 != null  and poundsImg2 != ''  ">pounds_img2 = #{poundsImg2},</if>
+            <if test="poundsNum1 != null  and poundsNum1 != ''  ">pounds_num1 = #{poundsNum1},</if>
+            <if test="poundsNum2 != null  and poundsNum2 != ''  ">pounds_num2 = #{poundsNum2},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="deliveryTime != null  ">delivery_time = #{deliveryTime},</if>
+            <if test="deliveryGoodsTime != null  ">delivery_goods_time = #{deliveryGoodsTime},</if>
+            <if test="confirmReceiptTime != null  ">confirm_receipt_time = #{confirmReceiptTime},</if>
+            <if test="flag != null  ">flag = #{flag},</if>
+            <if test="isCancel != null  ">is_cancel = #{isCancel},</if>
+            <if test="waybillState != null  ">waybill_state = #{waybillState},</if>
+            <if test="storedState != null  ">stored_state = #{storedState},</if>
+            <if test="freightPayState != null  ">freight_pay_state = #{freightPayState},</if>
+            <if test="freightPayWay != null  ">freight_pay_way = #{freightPayWay},</if>
+            <if test="insurancePayState != null  ">insurance_pay_state = #{insurancePayState},</if>
+            <if test="isComments != null  ">is_comments = #{isComments},</if>
+            <if test="star != null  ">star = #{star},</if>
+            <if test="comment != null  and comment != ''  ">comment = #{comment},</if>
+            <if test="evaluateOptions != null  and evaluateOptions != ''  ">evaluate_options = #{evaluateOptions},</if>
+            <if test="receiptStatus != null  ">receipt_status = #{receiptStatus},</if>
+            <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+             <if test="ownerId != null  ">owner_id = #{ownerId},</if>
+       </set>
+        where id = #{id}
+    </update>
+<update id="upPWaybill" parameterType="PWaybillVo">
+        update p_waybill
+       <set>
+            <if test="waybillNumber != null  and waybillNumber != ''  ">waybill_number = #{waybillNumber},</if>
+            <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+            <if test="carId != null  and carId != ''  ">car_id = #{carId},</if>
+            <if test="freightId != null  and freightId != ''  ">freight_id = #{freightId},</if>
+            <if test="insuranceId != null  and insuranceId != ''  ">insurance_id = #{insuranceId},</if>
+            <if test="advanceFreight != null  ">advance_freight = #{advanceFreight},</if>
+            <if test="actualFreight != null  ">actual_freight = #{actualFreight},</if>
+            <if test="freightConfirmer != null  and freightConfirmer != ''  ">freight_confirmer = #{freightConfirmer},</if>
+            <if test="freightConfirmationTime != null  ">freight_confirmation_time = #{freightConfirmationTime},</if>
+            <if test="freightConfirmationOpinion != null  and freightConfirmationOpinion != ''  ">freight_confirmation_opinion = #{freightConfirmationOpinion},</if>
+            <if test="modifyCause != null  and modifyCause != ''  ">modify_cause = #{modifyCause},</if>
+            <if test="poundsImg1 != null  and poundsImg1 != ''  ">pounds_img1 = #{poundsImg1},</if>
+            <if test="poundsImg2 != null  and poundsImg2 != ''  ">pounds_img2 = #{poundsImg2},</if>
+            <if test="poundsNum1 != null  and poundsNum1 != ''  ">pounds_num1 = #{poundsNum1},</if>
+            <if test="poundsNum2 != null  and poundsNum2 != ''  ">pounds_num2 = #{poundsNum2},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="deliveryTime != null  ">delivery_time = #{deliveryTime},</if>
+            <if test="deliveryGoodsTime != null  ">delivery_goods_time = #{deliveryGoodsTime},</if>
+            <if test="confirmReceiptTime != null  ">confirm_receipt_time = #{confirmReceiptTime},</if>
+            <if test="flag != null  ">flag = #{flag},</if>
+            <if test="isCancel != null  ">is_cancel = #{isCancel},</if>
+            <if test="waybillState != null  ">waybill_state = #{waybillState},</if>
+            <if test="storedState != null  ">stored_state = #{storedState},</if>
+            <if test="freightPayState != null  ">freight_pay_state = #{freightPayState},</if>
+            <if test="freightPayWay != null  ">freight_pay_way = #{freightPayWay},</if>
+            <if test="insurancePayState != null  ">insurance_pay_state = #{insurancePayState},</if>
+            <if test="isComments != null  ">is_comments = #{isComments},</if>
+            <if test="star != null  ">star = #{star},</if>
+            <if test="comment != null  and comment != ''  ">comment = #{comment},</if>
+            <if test="evaluateOptions != null  and evaluateOptions != ''  ">evaluate_options = #{evaluateOptions},</if>
+            <if test="receiptStatus != null  ">receipt_status = #{receiptStatus},</if>
+            <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+             <if test="ownerId != null  ">owner_id = #{ownerId},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+    <update id="updatePWaybillByIds"  parameterType="java.util.Map">
+        UPDATE p_waybill
+        <set>
+           <if test="waybillNumber != null  and waybillNumber != ''  ">waybill_number = #{waybillNumber},</if>
+           <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+           <if test="carId != null  and carId != ''  ">car_id = #{carId},</if>
+           <if test="freightId != null  and freightId != ''  ">freight_id = #{freightId},</if>
+           <if test="insuranceId != null  and insuranceId != ''  ">insurance_id = #{insuranceId},</if>
+           <if test="advanceFreight != null  ">advance_freight = #{advanceFreight},</if>
+           <if test="actualFreight != null  ">actual_freight = #{actualFreight},</if>
+           <if test="freightConfirmer != null  and freightConfirmer != ''  ">freight_confirmer = #{freightConfirmer},</if>
+           <if test="freightConfirmationTime != null  ">freight_confirmation_time = #{freightConfirmationTime},</if>
+           <if test="freightConfirmationOpinion != null  and freightConfirmationOpinion != ''  ">freight_confirmation_opinion = #{freightConfirmationOpinion},</if>
+           <if test="modifyCause != null  and modifyCause != ''  ">modify_cause = #{modifyCause},</if>
+           <if test="poundsImg1 != null  and poundsImg1 != ''  ">pounds_img1 = #{poundsImg1},</if>
+           <if test="poundsImg2 != null  and poundsImg2 != ''  ">pounds_img2 = #{poundsImg2},</if>
+           <if test="poundsNum1 != null  and poundsNum1 != ''  ">pounds_num1 = #{poundsNum1},</if>
+           <if test="poundsNum2 != null  and poundsNum2 != ''  ">pounds_num2 = #{poundsNum2},</if>
+           <if test="createTime != null  ">create_time = #{createTime},</if>
+           <if test="deliveryTime != null  ">delivery_time = #{deliveryTime},</if>
+           <if test="deliveryGoodsTime != null  ">delivery_goods_time = #{deliveryGoodsTime},</if>
+           <if test="confirmReceiptTime != null  ">confirm_receipt_time = #{confirmReceiptTime},</if>
+           <if test="flag != null  ">flag = #{flag},</if>
+           <if test="isCancel != null  ">is_cancel = #{isCancel},</if>
+           <if test="waybillState != null  ">waybill_state = #{waybillState},</if>
+           <if test="storedState != null  ">stored_state = #{storedState},</if>
+           <if test="freightPayState != null  ">freight_pay_state = #{freightPayState},</if>
+           <if test="freightPayWay != null  ">freight_pay_way = #{freightPayWay},</if>
+           <if test="insurancePayState != null  ">insurance_pay_state = #{insurancePayState},</if>
+           <if test="isComments != null  ">is_comments = #{isComments},</if>
+           <if test="star != null  ">star = #{star},</if>
+           <if test="comment != null  and comment != ''  ">comment = #{comment},</if>
+           <if test="evaluateOptions != null  and evaluateOptions != ''  ">evaluate_options = #{evaluateOptions},</if>
+           <if test="receiptStatus != null  ">receipt_status = #{receiptStatus},</if>
+           <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+           <if test="ownerId != null  ">owner_id = #{ownerId},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deletePWaybillByIds" parameterType="String">
+        delete from p_waybill where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getByIds" parameterType="java.util.List" resultMap="PWaybillResult">
+        <include refid="selectPWaybillVo"/>
+        where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+             #{item}
+         </foreach>
+    </select>
+    <select id="listByShipperId" parameterType="PWaybill" resultMap="PWaybillResult">
+    	select
+		pw.id,
+		pw.waybill_number as waybillNumber,
+		pw.invoice_id as invoiceId,
+		pw.car_id as carId,
+		pw.freight_id AS freightId,
+		pw.insurance_id AS insuranceId,
+		pw.advance_freight AS advanceFreight,
+		pw.actual_freight AS actualFreight,
+		pw.freight_confirmer AS freightConfirmer,
+		pw.freight_confirmation_time AS freightConfirmationTime,
+		pw.freight_confirmation_opinion AS freightConfirmationOpinion,
+		pw.modify_cause AS modifyCause,
+		pw.pounds_img1 AS poundsImg1,
+		pw.pounds_img2 AS poundsImg2,
+		pw.pounds_num1 AS poundsNum1,
+		pw.pounds_num2 AS poundsNum2,
+		pw.create_time AS createTime,
+		pw.delivery_time AS deliveryTime,
+		pw.delivery_goods_time AS deliveryGoodsTime,
+		pw.confirm_receipt_time AS confirmReceiptTime,
+		pw.flag AS flag,
+		pw.is_cancel AS isCancel,
+		pw.waybill_state AS waybillState,
+		pw.stored_state AS storedState,
+		pw.freight_pay_state AS freightPayState,
+		pw.freight_pay_way AS freightPyWay,
+		pw.insurance_pay_state AS insurancePayState,
+	<!-- 	pw.is_comments AS isComments,
+		pw.star AS star, -->
+		pw.comment AS comment,
+		pw.evaluate_options AS evaluateOptions,
+		pw.receipt_status AS receiptStatus,
+		pw.delete_flag AS deleteFlag
+		FROM
+		p_waybill pw,
+		p_invoice pi
+		where
+		pw.invoice_id = pi.id
+		AND pi.shipper_id = #{shipperId}
+    </select>
+    
+    <!-- 根据货主和车主查询运单信息 -->
+     <select id="listByInvoiceIds" parameterType="java.lang.String" resultType="com.yrsoft.platform.entity.PWaybillVo">
+        SELECT pw.id,pw.car_id as carId,pw.waybill_number as waybillNumber,pw.flag,pw.actual_freight as actualFreight,pw.waybill_state as waybillState from p_invoice pi 
+		LEFT JOIN p_waybill pw on pw.invoice_id=pi.id
+		<where>
+		pw.owner_id=#{ownerId}
+		and pi.shipper_id=#{shipperId}
+		and pw.delete_flag = 0
+		and pi.delete_flag = 0
+          <if test="waybillNumber != null  and waybillNumber != '' "> and pw.waybill_number  LIKE CONCAT("%",#{waybillNumber},"%")</if>
+          <if test="flag != null "> and pw.flag = #{flag}</if>
+          <if test="waybillState != null "> and pw.waybill_state = #{waybillState}</if>
+          <if test="startTime != null "> and pw.create_time &gt;= #{startTime}</if>
+          <if test="endTime != null "> and pw.create_time &lt;= #{endTime}</if>
+	   </where>
+    </select>
+    <!-- 从货运单,运单,运输单,无车承运人地区代码集查询相关信息 -->
+    <select id="selectTruckBrokerData" resultType="java.util.Map" parameterType="java.lang.String">
+    	SELECT
+    	    pw.id waybill_id, 
+  			/*运单ID*/
+			pin.shipper_id shipperId,
+			/*发货用户ID*/
+			pw.car_id carId,
+			/*运输车辆ID*/
+			pw.owner_id ownerId,
+  			/*车主ID*/
+			pw.waybill_number AS orderCode,
+			/*订单编号*/
+			pw.create_time AS orderCreateDate,
+			/*订单创建时间*/
+			pw.delivery_time AS startDate,
+			/*装车后的出发时间*/
+			pw.confirm_receipt_time AS arriveDate,
+			/*到达时间 有格式要求 */
+			pin.receive_user_name AS receiveUserName,
+			/*收货人姓名*/
+			CONCAT(
+				pin.start_province,
+				pin.start_city,
+				pin.start_area,
+				pin.start_address
+			) AS startAddress,
+			/*货物出发地*/
+			CONCAT(
+				pin.arrive_province,
+				pin.arrive_city,
+				pin.arrive_area,
+				pin.arrive_address
+			) AS arriveAddress,
+			/*货物到达地*/
+			pin.basic_amount / 100 AS orderAmount,
+			/*订单金额*/
+			pin.goods_weight AS goodsWeight,
+			/*货物重量*/
+			(SELECT code from p_truck_broker_area_code pba where 
+    		 pba.name = pin.start_area LIMIT 1) AS startCityCode,
+			/*出发地代码*/
+			(SELECT code from p_truck_broker_area_code pba2 where 
+    		 pba2.name = pin.arrive_area LIMIT 1) AS arriveCityCode,
+			/*到达地代码*/
+			(
+				SELECT
+					driver_id
+				FROM
+					p_transport pt
+				WHERE
+					pt.waybill_id = pw.id
+				AND pt.is_effective = 0
+				AND pt.delete_flag = 0
+				ORDER BY
+					create_time DESC
+				LIMIT 1
+			) AS driverId
+			/*司机ID*/
+		FROM
+			p_waybill pw
+		LEFT JOIN p_invoice pin ON pw.invoice_id = pin.id
+		<where>
+			<if test=" _parameter!=null and _parameter!='' ">
+				pw.id = #{_parameter}	
+			</if>
+		</where>
+    </select>
+
+	<update id="updateInsuranceSendStateById" parameterType="String">
+		update p_waybill set insurance_send_state=1 where id=#{id} and insurance_send_state=0
+
+	</update>
+</mapper>

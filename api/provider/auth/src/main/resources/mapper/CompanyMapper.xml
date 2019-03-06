@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.auth.dao.CompanyDao">
+
+    <resultMap type="com.yrsoft.auth.entity.Company" id="CompanyResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="memberId"  column="member_id" javaType="String"/>
+    <result property="companyName"  column="company_name" javaType="String"/>
+    <result property="companyHost"  column="company_host" javaType="String"/>
+    <result property="businessLicenceCode"  column="business_licence_code" javaType="String"/>
+    <result property="companyHostId"  column="company_host_id" javaType="String"/>
+    <result property="businessLicenceAddress"  column="business_licence_address" javaType="String"/>
+    <result property="businessLicenceValiditytime"  column="business_licence_validityTime" javaType="String"/>
+    <result property="businessLicenceImg"  column="business_licence_img" javaType="String"/>
+    <result property="hostIdCardImg"  column="host_id_card_img" javaType="String"/>
+    <result property="hostIdCardBackImg"  column="host_id_card_back_img" javaType="String"/>
+    <result property="status"  column="status" javaType="Integer"/>
+    <result property="createTime"  column="create_time" javaType="Integer"/>
+    <result property="newFlag"  column="new_flag" javaType="Integer"/>
+    <result property="checkTime"  column="check_time" javaType="Integer"/>
+    <result property="checkUserId"  column="check_user_id" javaType="String"/>
+    <result property="description"  column="description" javaType="String"/>
+    <result property="isSys"  column="is_sys" javaType="Integer"/>
+    <result property="isLsjData"  column="is_lsj_data" javaType="Integer"/>
+    </resultMap>
+	
+	<sql id="selectCompanyVo">
+        select id, member_id, company_name, company_host, business_licence_code, company_host_id, business_licence_address, business_licence_validityTime, business_licence_img, host_id_card_img, host_id_card_back_img, status, create_time, new_flag, check_time, check_user_id, description, is_sys, is_lsj_data from a_company
+    </sql>
+	
+
+    <select id="selectCompanyById" parameterType="String" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectCompanyList" parameterType="Company" resultMap="CompanyResult">
+        <include refid="selectCompanyVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="memberId != null  and memberId != '' "> and member_id = #{memberId}</if>
+                            <if test="companyName != null  and companyName != '' "> and company_name = #{companyName}</if>
+                            <if test="companyHost != null  and companyHost != '' "> and company_host = #{companyHost}</if>
+                            <if test="businessLicenceCode != null  and businessLicenceCode != '' "> and business_licence_code = #{businessLicenceCode}</if>
+                            <if test="companyHostId != null  and companyHostId != '' "> and company_host_id = #{companyHostId}</if>
+                            <if test="businessLicenceAddress != null  and businessLicenceAddress != '' "> and business_licence_address = #{businessLicenceAddress}</if>
+                            <if test="businessLicenceValiditytime != null  and businessLicenceValiditytime != '' "> and business_licence_validityTime = #{businessLicenceValiditytime}</if>
+                            <if test="businessLicenceImg != null  and businessLicenceImg != '' "> and business_licence_img = #{businessLicenceImg}</if>
+                            <if test="hostIdCardImg != null  and hostIdCardImg != '' "> and host_id_card_img = #{hostIdCardImg}</if>
+                            <if test="hostIdCardBackImg != null  and hostIdCardBackImg != '' "> and host_id_card_back_img = #{hostIdCardBackImg}</if>
+                            <if test="status != null "> and status = #{status}</if>
+                            <if test="createTime != null "> and create_time = #{createTime}</if>
+                            <if test="newFlag != null "> and new_flag = #{newFlag}</if>
+                            <if test="checkTime != null "> and check_time = #{checkTime}</if>
+                            <if test="checkUserId != null  and checkUserId != '' "> and check_user_id = #{checkUserId}</if>
+                            <if test="description != null  and description != '' "> and description = #{description}</if>
+                            <if test="isSys != null "> and is_sys = #{isSys}</if>
+                            <if test="isLsjData != null "> and is_lsj_data = #{isLsjData}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertCompany" parameterType="Company">
+        insert into a_company
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="memberId != null  and memberId != ''  ">member_id,</if>
+			<if test="companyName != null  and companyName != ''  ">company_name,</if>
+			<if test="companyHost != null  and companyHost != ''  ">company_host,</if>
+			<if test="businessLicenceCode != null  and businessLicenceCode != ''  ">business_licence_code,</if>
+			<if test="companyHostId != null  and companyHostId != ''  ">company_host_id,</if>
+			<if test="businessLicenceAddress != null  and businessLicenceAddress != ''  ">business_licence_address,</if>
+			<if test="businessLicenceValiditytime != null  and businessLicenceValiditytime != ''  ">business_licence_validityTime,</if>
+			<if test="businessLicenceImg != null  and businessLicenceImg != ''  ">business_licence_img,</if>
+			<if test="hostIdCardImg != null  and hostIdCardImg != ''  ">host_id_card_img,</if>
+			<if test="hostIdCardBackImg != null  and hostIdCardBackImg != ''  ">host_id_card_back_img,</if>
+			<if test="status != null  ">status,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="newFlag != null  ">new_flag,</if>
+			<if test="checkTime != null  ">check_time,</if>
+			<if test="checkUserId != null  and checkUserId != ''  ">check_user_id,</if>
+			<if test="description != null  and description != ''  ">description,</if>
+			<if test="isSys != null  ">is_sys,</if>
+			<if test="isLsjData != null  ">is_lsj_data,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="memberId != null  and memberId != ''  ">#{memberId},</if>
+			<if test="companyName != null  and companyName != ''  ">#{companyName},</if>
+			<if test="companyHost != null  and companyHost != ''  ">#{companyHost},</if>
+			<if test="businessLicenceCode != null  and businessLicenceCode != ''  ">#{businessLicenceCode},</if>
+			<if test="companyHostId != null  and companyHostId != ''  ">#{companyHostId},</if>
+			<if test="businessLicenceAddress != null  and businessLicenceAddress != ''  ">#{businessLicenceAddress},</if>
+			<if test="businessLicenceValiditytime != null  and businessLicenceValiditytime != ''  ">#{businessLicenceValiditytime},</if>
+			<if test="businessLicenceImg != null  and businessLicenceImg != ''  ">#{businessLicenceImg},</if>
+			<if test="hostIdCardImg != null  and hostIdCardImg != ''  ">#{hostIdCardImg},</if>
+			<if test="hostIdCardBackImg != null  and hostIdCardBackImg != ''  ">#{hostIdCardBackImg},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="newFlag != null  ">#{newFlag},</if>
+			<if test="checkTime != null  ">#{checkTime},</if>
+			<if test="checkUserId != null  and checkUserId != ''  ">#{checkUserId},</if>
+			<if test="description != null  and description != ''  ">#{description},</if>
+			<if test="isSys != null  ">#{isSys},</if>
+			<if test="isLsjData != null  ">#{isLsjData},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateCompany" parameterType="Company">
+        update a_company
+       <set>
+            <if test="memberId != null  and memberId != ''  ">member_id = #{memberId},</if>
+            <if test="companyName != null  and companyName != ''  ">company_name = #{companyName},</if>
+            <if test="companyHost != null  and companyHost != ''  ">company_host = #{companyHost},</if>
+            <if test="businessLicenceCode != null  and businessLicenceCode != ''  ">business_licence_code = #{businessLicenceCode},</if>
+            <if test="companyHostId != null  and companyHostId != ''  ">company_host_id = #{companyHostId},</if>
+            <if test="businessLicenceAddress != null  and businessLicenceAddress != ''  ">business_licence_address = #{businessLicenceAddress},</if>
+            <if test="businessLicenceValiditytime != null  and businessLicenceValiditytime != ''  ">business_licence_validityTime = #{businessLicenceValiditytime},</if>
+            <if test="businessLicenceImg != null  and businessLicenceImg != ''  ">business_licence_img = #{businessLicenceImg},</if>
+            <if test="hostIdCardImg != null  and hostIdCardImg != ''  ">host_id_card_img = #{hostIdCardImg},</if>
+            <if test="hostIdCardBackImg != null  and hostIdCardBackImg != ''  ">host_id_card_back_img = #{hostIdCardBackImg},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="newFlag != null  ">new_flag = #{newFlag},</if>
+            <if test="checkTime != null  ">check_time = #{checkTime},</if>
+            <if test="checkUserId != null  and checkUserId != ''  ">check_user_id = #{checkUserId},</if>
+            <if test="description != null  and description != ''  ">description = #{description},</if>
+            <if test="isSys != null  ">is_sys = #{isSys},</if>
+            <if test="isLsjData != null  ">is_lsj_data = #{isLsjData},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updateCompanyByIds"  parameterType="java.util.Map">
+        UPDATE a_company
+        <set>
+           <if test="memberId != null  and memberId != ''  ">member_id = #{memberId},</if>
+           <if test="companyName != null  and companyName != ''  ">company_name = #{companyName},</if>
+           <if test="companyHost != null  and companyHost != ''  ">company_host = #{companyHost},</if>
+           <if test="businessLicenceCode != null  and businessLicenceCode != ''  ">business_licence_code = #{businessLicenceCode},</if>
+           <if test="companyHostId != null  and companyHostId != ''  ">company_host_id = #{companyHostId},</if>
+           <if test="businessLicenceAddress != null  and businessLicenceAddress != ''  ">business_licence_address = #{businessLicenceAddress},</if>
+           <if test="businessLicenceValiditytime != null  and businessLicenceValiditytime != ''  ">business_licence_validityTime = #{businessLicenceValiditytime},</if>
+           <if test="businessLicenceImg != null  and businessLicenceImg != ''  ">business_licence_img = #{businessLicenceImg},</if>
+           <if test="hostIdCardImg != null  and hostIdCardImg != ''  ">host_id_card_img = #{hostIdCardImg},</if>
+           <if test="hostIdCardBackImg != null  and hostIdCardBackImg != ''  ">host_id_card_back_img = #{hostIdCardBackImg},</if>
+           <if test="status != null  ">status = #{status},</if>
+           <if test="createTime != null  ">create_time = #{createTime},</if>
+           <if test="newFlag != null  ">new_flag = #{newFlag},</if>
+           <if test="checkTime != null  ">check_time = #{checkTime},</if>
+           <if test="checkUserId != null  and checkUserId != ''  ">check_user_id = #{checkUserId},</if>
+           <if test="description != null  and description != ''  ">description = #{description},</if>
+           <if test="isSys != null  ">is_sys = #{isSys},</if>
+           <if test="isLsjData != null  ">is_lsj_data = #{isLsjData},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deleteCompanyByIds" parameterType="String">
+        delete from a_company where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.platform.dao.PInsuranceDao">
+
+    <resultMap type="com.yrsoft.platform.entity.PInsurance" id="PInsuranceResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="memberId"  column="member_id" javaType="String"/>
+    <result property="payType"  column="pay_type" javaType="Integer"/>
+    <result property="payMoney"  column="pay_money" javaType="Long"/>
+    <result property="payTime"  column="pay_time" javaType="Integer"/>
+    <result property="payState"  column="pay_state" javaType="Integer"/>
+    <result property="notifyTime"  column="notify_time" javaType="Integer"/>
+    <result property="notifyContent"  column="notify_content" javaType="String"/>
+    <result property="payAccount"  column="pay_account" javaType="String"/>
+    <result property="paySerialCode"  column="pay_serial_code" javaType="String"/>
+    </resultMap>
+	
+	<sql id="selectPInsuranceVo">
+        select id, member_id, pay_type, pay_money, pay_time, pay_state, notify_time, notify_content, pay_account, pay_serial_code from p_insurance
+    </sql>
+	
+
+    <select id="selectPInsuranceById" parameterType="String" resultMap="PInsuranceResult">
+        <include refid="selectPInsuranceVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectPInsuranceList" parameterType="PInsurance" resultMap="PInsuranceResult">
+        <include refid="selectPInsuranceVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="memberId != null  and memberId != '' "> and member_id = #{memberId}</if>
+                            <if test="payType != null "> and pay_type = #{payType}</if>
+                            <if test="payMoney != null "> and pay_money = #{payMoney}</if>
+                            <if test="payTime != null "> and pay_time = #{payTime}</if>
+                            <if test="payState != null "> and pay_state = #{payState}</if>
+                            <if test="notifyTime != null "> and notify_time = #{notifyTime}</if>
+                            <if test="notifyContent != null  and notifyContent != '' "> and notify_content = #{notifyContent}</if>
+                            <if test="payAccount != null  and payAccount != '' "> and pay_account = #{payAccount}</if>
+                            <if test="paySerialCode != null  and paySerialCode != '' "> and pay_serial_code = #{paySerialCode}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertPInsurance" parameterType="PInsurance">
+        insert into p_insurance
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="memberId != null  and memberId != ''  ">member_id,</if>
+			<if test="payType != null  ">pay_type,</if>
+			<if test="payMoney != null  ">pay_money,</if>
+			<if test="payTime != null  ">pay_time,</if>
+			<if test="payState != null  ">pay_state,</if>
+			<if test="notifyTime != null  ">notify_time,</if>
+			<if test="notifyContent != null  and notifyContent != ''  ">notify_content,</if>
+			<if test="payAccount != null  and payAccount != ''  ">pay_account,</if>
+			<if test="paySerialCode != null  and paySerialCode != ''  ">pay_serial_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="memberId != null  and memberId != ''  ">#{memberId},</if>
+			<if test="payType != null  ">#{payType},</if>
+			<if test="payMoney != null  ">#{payMoney},</if>
+			<if test="payTime != null  ">#{payTime},</if>
+			<if test="payState != null  ">#{payState},</if>
+			<if test="notifyTime != null  ">#{notifyTime},</if>
+			<if test="notifyContent != null  and notifyContent != ''  ">#{notifyContent},</if>
+			<if test="payAccount != null  and payAccount != ''  ">#{payAccount},</if>
+			<if test="paySerialCode != null  and paySerialCode != ''  ">#{paySerialCode},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePInsurance" parameterType="PInsurance">
+        update p_insurance
+       <set>
+            <if test="memberId != null  and memberId != ''  ">member_id = #{memberId},</if>
+            <if test="payType != null  ">pay_type = #{payType},</if>
+            <if test="payMoney != null  ">pay_money = #{payMoney},</if>
+            <if test="payTime != null  ">pay_time = #{payTime},</if>
+            <if test="payState != null  ">pay_state = #{payState},</if>
+            <if test="notifyTime != null  ">notify_time = #{notifyTime},</if>
+            <if test="notifyContent != null  and notifyContent != ''  ">notify_content = #{notifyContent},</if>
+            <if test="payAccount != null  and payAccount != ''  ">pay_account = #{payAccount},</if>
+            <if test="paySerialCode != null  and paySerialCode != ''  ">pay_serial_code = #{paySerialCode},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updatePInsuranceByIds"  parameterType="java.util.Map">
+        UPDATE p_insurance
+        <set>
+           <if test="memberId != null  and memberId != ''  ">member_id = #{memberId},</if>
+           <if test="payType != null  ">pay_type = #{payType},</if>
+           <if test="payMoney != null  ">pay_money = #{payMoney},</if>
+           <if test="payTime != null  ">pay_time = #{payTime},</if>
+           <if test="payState != null  ">pay_state = #{payState},</if>
+           <if test="notifyTime != null  ">notify_time = #{notifyTime},</if>
+           <if test="notifyContent != null  and notifyContent != ''  ">notify_content = #{notifyContent},</if>
+           <if test="payAccount != null  and payAccount != ''  ">pay_account = #{payAccount},</if>
+           <if test="paySerialCode != null  and paySerialCode != ''  ">pay_serial_code = #{paySerialCode},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deletePInsuranceByIds" parameterType="String">
+        delete from p_insurance where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

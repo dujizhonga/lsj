@@ -1,0 +1,19 @@
+#tomcat配置
+server:
+  port: 8095
+#排除数据源的自动配置
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+servicecomb:
+  cors:
+    enabled: true
+#加解密配置
+aesjm:
+  #请求解密
+  request: false
+  #响应加密
+  response: false
+#自定义激活配置文件
+activation:
+  file: beat

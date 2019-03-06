@@ -1,0 +1,27 @@
+#tomcat配置
+server:
+  port: 8092
+#排除数据源的自动配置
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+#自定义激活配置文件
+activation:
+  file: dev
+
+#文件路径信息配置
+filePath:
+  basePath: /upload
+  returnUrl: 127.0.0.1:8080/api/show/file
+  #最大文件大小单位为kb
+  fileSize: 3000
+  fileSuffix: doc,docx,jpg,png,gif,bmp
+  filesTypes:
+    - type: auth
+      params:
+        - owner
+        - shipper
+        - truck
+    - type: system
+      params:
+        - appinfo

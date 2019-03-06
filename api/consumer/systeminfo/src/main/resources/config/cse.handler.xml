@@ -1,0 +1,4 @@
+<config>
+  <handler id="lsj-handler"
+    class="com.yrsoft.filter.handler.LsjHandler"/>
+</config>
