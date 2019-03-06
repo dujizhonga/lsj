@@ -17,7 +17,10 @@ import com.yrsoft.delivery.dto.PcpCarDTO;
 import com.yrsoft.delivery.dto.SysCarDTO;
 import com.yrsoft.delivery.service.CarService;
 import com.yrsoft.delivery.vo.CarInfosVO;
+<<<<<<< HEAD
 import com.yrsoft.delivery.vo.Inglat;
+=======
+>>>>>>> 0e530f1b3e4ace38205138e9c7b67488b23faa10
 import com.yrsoft.delivery.vo.SysCarVO;
 import com.yrsoft.delivery.vo.SystemCarVO;
 
@@ -68,9 +71,16 @@ public class CarServiceImpl implements CarService {
 			String id = sysCar.get(i).getId();
 			MultiValueMap<String, String> request = new LinkedMultiValueMap<>();
 			request.add("id", id);
+<<<<<<< HEAD
 			String carObject = restTemplate.postForObject(UrlContants.POSITION + "poCarPosition/getPoCarPositionById",
 					request, String.class);
 			PcpCarDTO pcpCarDTO = JSONUtil.toBean(carObject, PcpCarDTO.class);
+=======
+			String carObject = restTemplate.postForObject(
+			UrlContants.POSITION + "poCarPosition/getPoCarPositionById", request, String.class);
+			PcpCarDTO pcpCarDTO = JSONUtil.toBean(carObject, PcpCarDTO.class);
+			String lnglat = pcpCarDTO.getData().getLng() +","+ pcpCarDTO.getData().getLat();
+>>>>>>> 0e530f1b3e4ace38205138e9c7b67488b23faa10
 			String Style = "";
 			if (null != sysCar.get(i).getRunStatus() && 0 == sysCar.get(i).getRunStatus()) {
 				Style = "1";
@@ -79,11 +89,16 @@ public class CarServiceImpl implements CarService {
 			}
 			String name = "系统车";
 			SystemCarVO sysc = new SystemCarVO();
+<<<<<<< HEAD
 			Inglat Lnglat = new Inglat();
 			Lnglat.setLat(pcpCarDTO.getData().getLat());
 			Lnglat.setLng(pcpCarDTO.getData().getLng());
 			sysc.setId(id);
 			sysc.setLnglat(Lnglat);
+=======
+			sysc.setId(id);
+			sysc.setLnglat(lnglat);
+>>>>>>> 0e530f1b3e4ace38205138e9c7b67488b23faa10
 			sysc.setId(Style);
 			sysc.setName(name);
 			sysc.setCarNumber(sysCar.get(i).getCarNumber());
