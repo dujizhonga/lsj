@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.member.dao.BoOwnerShipperDao">
+
+    <resultMap type="com.yrsoft.member.entity.BoOwnerShipper" id="BoOwnerShipperResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="shipperId"  column="shipper_id" javaType="String"/>
+    <result property="ownerId"  column="owner_id" javaType="String"/>
+    <result property="applyId"  column="apply_id" javaType="String"/>
+    <result property="time"  column="time" javaType="Integer"/>
+    <result property="status"  column="status" javaType="Integer"/>
+    <result property="sourceState"  column="source_state" javaType="Integer"/>
+    
+    </resultMap>
+	
+	<sql id="selectBoOwnerShipperVo">
+        select id, shipper_id, owner_id, apply_id, time, status, source_state from bo_owner_shipper
+    </sql>
+	
+
+    <select id="selectBoOwnerShipperById" parameterType="String" resultMap="BoOwnerShipperResult">
+        <include refid="selectBoOwnerShipperVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectBoOwnerShipperList" parameterType="BoOwnerShipper" resultMap="BoOwnerShipperResult">
+        <include refid="selectBoOwnerShipperVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="shipperId != null  and shipperId != '' "> and shipper_id = #{shipperId}</if>
+                            <if test="ownerId != null  and ownerId != '' "> and owner_id = #{ownerId}</if>
+                            <if test="applyId != null  and applyId != '' "> and apply_id = #{applyId}</if>
+                            <if test="time != null "> and time = #{time}</if>
+                            <if test="status != null "> and status = #{status}</if>
+                            <if test="sourceState != null "> and source_state = #{sourceState}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertBoOwnerShipper" parameterType="BoOwnerShipper">
+        insert into bo_owner_shipper
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="shipperId != null  and shipperId != ''  ">shipper_id,</if>
+			<if test="ownerId != null  and ownerId != ''  ">owner_id,</if>
+			<if test="applyId != null  and applyId != ''  ">apply_id,</if>
+			<if test="time != null  ">time,</if>
+			<if test="status != null  ">status,</if>
+			<if test="sourceState != null  ">source_state,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="shipperId != null  and shipperId != ''  ">#{shipperId},</if>
+			<if test="ownerId != null  and ownerId != ''  ">#{ownerId},</if>
+			<if test="applyId != null  and applyId != ''  ">#{applyId},</if>
+			<if test="time != null  ">#{time},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="sourceState != null  ">#{sourceState},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateBoOwnerShipper" parameterType="BoOwnerShipper">
+        update bo_owner_shipper
+       <set>
+            <if test="shipperId != null  and shipperId != ''  ">shipper_id = #{shipperId},</if>
+            <if test="ownerId != null  and ownerId != ''  ">owner_id = #{ownerId},</if>
+            <if test="applyId != null  and applyId != ''  ">apply_id = #{applyId},</if>
+            <if test="time != null  ">time = #{time},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="sourceState != null  ">source_state = #{sourceState},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updateBoOwnerShipperByIds"  parameterType="java.util.Map">
+        UPDATE bo_owner_shipper
+        <set>
+           <if test="shipperId != null  and shipperId != ''  ">shipper_id = #{shipperId},</if>
+           <if test="ownerId != null  and ownerId != ''  ">owner_id = #{ownerId},</if>
+           <if test="applyId != null  and applyId != ''  ">apply_id = #{applyId},</if>
+           <if test="time != null  ">time = #{time},</if>
+           <if test="status != null  ">status = #{status},</if>
+           <if test="sourceState != null  ">source_state = #{sourceState},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deleteBoOwnerShipperByIds" parameterType="String">
+        delete from bo_owner_shipper where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--货主关注车主的信息  -->
+    <select id="selectOwnerInfo" parameterType="String" resultType="map">
+	    SELECT
+	    	o.shipper_id shipperId,
+			o.owner_id ownerId,
+			m.nickname,
+			m.telephone,
+			COUNT(c.id) carCount
+		FROM
+			bo_owner_shipper o
+		LEFT JOIN m_member m ON o.owner_id = m.id
+		LEFT JOIN a_car c ON o.owner_id = c.member_id
+		WHERE c.delete_flag=0 AND o.`status` =0
+		AND o.shipper_id= #{shipperId}
+		GROUP BY c.member_id
+    </select>
+</mapper>

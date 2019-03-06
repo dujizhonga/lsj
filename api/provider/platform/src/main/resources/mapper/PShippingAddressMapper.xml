@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.platform.dao.PShippingAddressDao">
+
+    <resultMap type="com.yrsoft.platform.entity.PShippingAddress" id="PShippingAddressResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="shipperId"  column="shipper_id" javaType="String"/>
+    <result property="province"  column="province" javaType="String"/>
+    <result property="city"  column="city" javaType="String"/>
+    <result property="area"  column="area" javaType="String"/>
+    <result property="address"  column="address" javaType="String"/>
+    <result property="lng"  column="lng" javaType="String"/>
+    <result property="lat"  column="lat" javaType="String"/>
+    <result property="name"  column="name" javaType="String"/>
+    <result property="phone"  column="phone" javaType="String"/>
+    <result property="createTime"  column="create_time" javaType="Integer"/>
+    <result property="updateTime"  column="update_time" javaType="Integer"/>
+    <result property="defaultState"  column="default_state" javaType="Integer"/>
+    <result property="addressType"  column="address_type" javaType="Integer"/>
+    <result property="addressStatus"  column="address_status" javaType="Integer"/>
+    <result property="provinceCode"  column="province_code" javaType="String"/>
+    <result property="cityCode"  column="city_code" javaType="String"/>
+    <result property="areaCode"  column="area_code" javaType="String"/>
+    <result property="deleteFlag"  column="delete_flag" javaType="Integer"/>
+    </resultMap>
+	
+	<sql id="selectPShippingAddressVo">
+        select id, shipper_id, province, city, area, address, lng, lat, name, phone, create_time, update_time, default_state, address_type, address_status, province_code, city_code, area_code, delete_flag from p_shipping_address
+    </sql>
+	
+
+    <select id="selectPShippingAddressById" parameterType="String" resultMap="PShippingAddressResult">
+        <include refid="selectPShippingAddressVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectPShippingAddressList" parameterType="PShippingAddress" resultMap="PShippingAddressResult">
+        <include refid="selectPShippingAddressVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="shipperId != null  and shipperId != '' "> and shipper_id = #{shipperId}</if>
+                            <if test="province != null  and province != '' "> and province = #{province}</if>
+                            <if test="city != null  and city != '' "> and city = #{city}</if>
+                            <if test="area != null  and area != '' "> and area = #{area}</if>
+                            <if test="address != null  and address != '' "> and address = #{address}</if>
+                            <if test="lng != null  and lng != '' "> and lng = #{lng}</if>
+                            <if test="lat != null  and lat != '' "> and lat = #{lat}</if>
+                            <if test="name != null  and name != '' "> and name = #{name}</if>
+                            <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+                            <if test="createTime != null "> and create_time = #{createTime}</if>
+                            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+                            <if test="defaultState != null "> and default_state = #{defaultState}</if>
+                            <if test="addressType != null "> and address_type = #{addressType}</if>
+                            <if test="addressStatus != null "> and address_status = #{addressStatus}</if>
+                            <if test="provinceCode != null  and provinceCode != '' "> and province_code = #{provinceCode}</if>
+                            <if test="cityCode != null  and cityCode != '' "> and city_code = #{cityCode}</if>
+                            <if test="areaCode != null  and areaCode != '' "> and area_code = #{areaCode}</if>
+                            <if test="deleteFlag != null "> and delete_flag = #{deleteFlag}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertPShippingAddress" parameterType="PShippingAddress">
+        insert into p_shipping_address
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="shipperId != null  and shipperId != ''  ">shipper_id,</if>
+			<if test="province != null  and province != ''  ">province,</if>
+			<if test="city != null  and city != ''  ">city,</if>
+			<if test="area != null  and area != ''  ">area,</if>
+			<if test="address != null  and address != ''  ">address,</if>
+			<if test="lng != null  and lng != ''  ">lng,</if>
+			<if test="lat != null  and lat != ''  ">lat,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="updateTime != null  ">update_time,</if>
+			<if test="defaultState != null  ">default_state,</if>
+			<if test="addressType != null  ">address_type,</if>
+			<if test="addressStatus != null  ">address_status,</if>
+			<if test="provinceCode != null  and provinceCode != ''  ">province_code,</if>
+			<if test="cityCode != null  and cityCode != ''  ">city_code,</if>
+			<if test="areaCode != null  and areaCode != ''  ">area_code,</if>
+			<if test="deleteFlag != null  ">delete_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="shipperId != null  and shipperId != ''  ">#{shipperId},</if>
+			<if test="province != null  and province != ''  ">#{province},</if>
+			<if test="city != null  and city != ''  ">#{city},</if>
+			<if test="area != null  and area != ''  ">#{area},</if>
+			<if test="address != null  and address != ''  ">#{address},</if>
+			<if test="lng != null  and lng != ''  ">#{lng},</if>
+			<if test="lat != null  and lat != ''  ">#{lat},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="defaultState != null  ">#{defaultState},</if>
+			<if test="addressType != null  ">#{addressType},</if>
+			<if test="addressStatus != null  ">#{addressStatus},</if>
+			<if test="provinceCode != null  and provinceCode != ''  ">#{provinceCode},</if>
+			<if test="cityCode != null  and cityCode != ''  ">#{cityCode},</if>
+			<if test="areaCode != null  and areaCode != ''  ">#{areaCode},</if>
+			<if test="deleteFlag != null  ">#{deleteFlag},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePShippingAddress" parameterType="PShippingAddress">
+        update p_shipping_address
+       <set>
+            <if test="shipperId != null  and shipperId != ''  ">shipper_id = #{shipperId},</if>
+            <if test="province != null  and province != ''  ">province = #{province},</if>
+            <if test="city != null  and city != ''  ">city = #{city},</if>
+            <if test="area != null  and area != ''  ">area = #{area},</if>
+            <if test="address != null  and address != ''  ">address = #{address},</if>
+            <if test="lng != null  and lng != ''  ">lng = #{lng},</if>
+            <if test="lat != null  and lat != ''  ">lat = #{lat},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+            <if test="defaultState != null  ">default_state = #{defaultState},</if>
+            <if test="addressType != null  ">address_type = #{addressType},</if>
+            <if test="addressStatus != null  ">address_status = #{addressStatus},</if>
+            <if test="provinceCode != null  and provinceCode != ''  ">province_code = #{provinceCode},</if>
+            <if test="cityCode != null  and cityCode != ''  ">city_code = #{cityCode},</if>
+            <if test="areaCode != null  and areaCode != ''  ">area_code = #{areaCode},</if>
+            <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updatePShippingAddressByIds"  parameterType="java.util.Map">
+        UPDATE p_shipping_address
+        <set>
+           <if test="shipperId != null  and shipperId != ''  ">shipper_id = #{shipperId},</if>
+           <if test="province != null  and province != ''  ">province = #{province},</if>
+           <if test="city != null  and city != ''  ">city = #{city},</if>
+           <if test="area != null  and area != ''  ">area = #{area},</if>
+           <if test="address != null  and address != ''  ">address = #{address},</if>
+           <if test="lng != null  and lng != ''  ">lng = #{lng},</if>
+           <if test="lat != null  and lat != ''  ">lat = #{lat},</if>
+           <if test="name != null  and name != ''  ">name = #{name},</if>
+           <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+           <if test="createTime != null  ">create_time = #{createTime},</if>
+           <if test="updateTime != null  ">update_time = #{updateTime},</if>
+           <if test="defaultState != null  ">default_state = #{defaultState},</if>
+           <if test="addressType != null  ">address_type = #{addressType},</if>
+           <if test="addressStatus != null  ">address_status = #{addressStatus},</if>
+           <if test="provinceCode != null  and provinceCode != ''  ">province_code = #{provinceCode},</if>
+           <if test="cityCode != null  and cityCode != ''  ">city_code = #{cityCode},</if>
+           <if test="areaCode != null  and areaCode != ''  ">area_code = #{areaCode},</if>
+           <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deletePShippingAddressByIds" parameterType="String">
+        delete from p_shipping_address where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--查询货主的最新收发货地址  -->
+    <select id="selectAddressNew" parameterType="String" resultMap="PShippingAddressResult">
+		    	(
+			SELECT
+				*
+			FROM
+				p_shipping_address ps
+			WHERE
+				ps.shipper_id = #{shipperId}
+			AND ps.address_type = 0
+			AND ps.address_status = 0
+			AND ps.delete_flag = 0
+			ORDER BY
+				ps.update_time DESC
+			LIMIT 1
+		)
+		UNION
+			(
+				SELECT
+					*
+				FROM
+					p_shipping_address ps
+				WHERE
+					ps.shipper_id = #{shipperId}
+				AND ps.address_type = 1
+				AND ps.address_status = 0
+				AND ps.delete_flag = 0
+				ORDER BY
+					ps.update_time DESC
+				LIMIT 1
+			)
+    </select>
+    
+</mapper>

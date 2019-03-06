@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.platform.dao.PAssignApplyDao">
+
+    <resultMap type="com.yrsoft.platform.entity.PAssignApply" id="PAssignApplyResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="invoiceId"  column="invoice_id" javaType="String"/>
+    <result property="marginRecordsId"  column="margin_records_id" javaType="String"/>
+    <result property="createTime"  column="create_time" javaType="Integer"/>
+    <result property="carModel"  column="car_model" javaType="String"/>
+    <result property="needNum"  column="need_num" javaType="Integer"/>
+    <result property="allotNum"  column="allot_num" javaType="Integer"/>
+    <result property="receiptNum"  column="receipt_num" javaType="Integer"/>
+    <result property="status"  column="status" javaType="Integer"/>
+    <result property="deleteFlag"  column="delete_flag" javaType="Integer"/>
+    </resultMap>
+	
+	<sql id="selectPAssignApplyVo">
+        select id, invoice_id, margin_records_id, create_time, car_model, need_num, allot_num, receipt_num, status, delete_flag from p_assign_apply
+    </sql>
+	
+
+    <select id="selectPAssignApplyById" parameterType="String" resultMap="PAssignApplyResult">
+        <include refid="selectPAssignApplyVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectPAssignApplyList" parameterType="PAssignApply" resultMap="PAssignApplyResult">
+        <include refid="selectPAssignApplyVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="invoiceId != null  and invoiceId != '' "> and invoice_id = #{invoiceId}</if>
+                            <if test="marginRecordsId != null  and marginRecordsId != '' "> and margin_records_id = #{marginRecordsId}</if>
+                            <if test="createTime != null "> and create_time = #{createTime}</if>
+                            <if test="carModel != null  and carModel != '' "> and car_model = #{carModel}</if>
+                            <if test="needNum != null "> and need_num = #{needNum}</if>
+                            <if test="allotNum != null "> and allot_num = #{allotNum}</if>
+                            <if test="receiptNum != null "> and receipt_num = #{receiptNum}</if>
+                            <if test="status != null "> and status = #{status}</if>
+                            <if test="deleteFlag != null "> and delete_flag = #{deleteFlag}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertPAssignApply" parameterType="PAssignApply">
+        insert into p_assign_apply
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="invoiceId != null  and invoiceId != ''  ">invoice_id,</if>
+			<if test="marginRecordsId != null  and marginRecordsId != ''  ">margin_records_id,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="carModel != null  and carModel != ''  ">car_model,</if>
+			<if test="needNum != null  ">need_num,</if>
+			<if test="allotNum != null  ">allot_num,</if>
+			<if test="receiptNum != null  ">receipt_num,</if>
+			<if test="status != null  ">status,</if>
+			<if test="deleteFlag != null  ">delete_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="invoiceId != null  and invoiceId != ''  ">#{invoiceId},</if>
+			<if test="marginRecordsId != null  and marginRecordsId != ''  ">#{marginRecordsId},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="carModel != null  and carModel != ''  ">#{carModel},</if>
+			<if test="needNum != null  ">#{needNum},</if>
+			<if test="allotNum != null  ">#{allotNum},</if>
+			<if test="receiptNum != null  ">#{receiptNum},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="deleteFlag != null  ">#{deleteFlag},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePAssignApply" parameterType="PAssignApply">
+        update p_assign_apply
+       <set>
+            <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+            <if test="marginRecordsId != null  and marginRecordsId != ''  ">margin_records_id = #{marginRecordsId},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="carModel != null  and carModel != ''  ">car_model = #{carModel},</if>
+            <if test="needNum != null  ">need_num = #{needNum},</if>
+            <if test="allotNum != null  ">allot_num = #{allotNum},</if>
+            <if test="receiptNum != null  ">receipt_num = #{receiptNum},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updatePAssignApplyByIds"  parameterType="java.util.Map">
+        UPDATE p_assign_apply
+        <set>
+           <if test="invoiceId != null  and invoiceId != ''  ">invoice_id = #{invoiceId},</if>
+           <if test="marginRecordsId != null  and marginRecordsId != ''  ">margin_records_id = #{marginRecordsId},</if>
+           <if test="createTime != null  ">create_time = #{createTime},</if>
+           <if test="carModel != null  and carModel != ''  ">car_model = #{carModel},</if>
+           <if test="needNum != null  ">need_num = #{needNum},</if>
+           <if test="allotNum != null  ">allot_num = #{allotNum},</if>
+           <if test="receiptNum != null  ">receipt_num = #{receiptNum},</if>
+           <if test="status != null  ">status = #{status},</if>
+           <if test="deleteFlag != null  ">delete_flag = #{deleteFlag},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deletePAssignApplyByIds" parameterType="String">
+        delete from p_assign_apply where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

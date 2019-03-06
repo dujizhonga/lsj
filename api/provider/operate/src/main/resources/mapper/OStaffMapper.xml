@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yrsoft.operate.dao.OStaffDao">
+
+    <resultMap type="com.yrsoft.operate.entity.OStaff" id="OStaffResult">
+    <result property="id"  column="id" javaType="String"/>
+    <result property="name"  column="name" javaType="String"/>
+    <result property="age"  column="age" javaType="Integer"/>
+    <result property="sex"  column="sex" javaType="Integer"/>
+    <result property="entryTime"  column="entry_time" javaType="Integer"/>
+    <result property="contractPeriod"  column="contract_period" javaType="Integer"/>
+    <result property="isActive"  column="is_active" javaType="Integer"/>
+    <result property="telephone"  column="telephone" javaType="String"/>
+    <result property="workNumber"  column="work_number" javaType="String"/>
+    <result property="password"  column="password" javaType="String"/>
+    </resultMap>
+	
+	<sql id="selectOStaffVo">
+        select id, name, age, sex, entry_time, contract_period, is_active, telephone, work_number, password from o_staff
+    </sql>
+	
+
+    <select id="selectOStaffById" parameterType="String" resultMap="OStaffResult">
+        <include refid="selectOStaffVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectOStaffList" parameterType="OStaff" resultMap="OStaffResult">
+        <include refid="selectOStaffVo"/>
+        <where>
+                            <if test="id != null  and id != '' "> and id = #{id}</if>
+                            <if test="name != null  and name != '' "> and name = #{name}</if>
+                            <if test="age != null "> and age = #{age}</if>
+                            <if test="sex != null "> and sex = #{sex}</if>
+                            <if test="entryTime != null "> and entry_time = #{entryTime}</if>
+                            <if test="contractPeriod != null "> and contract_period = #{contractPeriod}</if>
+                            <if test="isActive != null "> and is_active = #{isActive}</if>
+                            <if test="telephone != null  and telephone != '' "> and telephone = #{telephone}</if>
+                            <if test="workNumber != null  and workNumber != '' "> and work_number = #{workNumber}</if>
+                            <if test="password != null  and password != '' "> and password = #{password}</if>
+                    </where>
+    </select>
+        
+    <insert id="insertOStaff" parameterType="OStaff">
+        insert into o_staff
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="age != null  ">age,</if>
+			<if test="sex != null  ">sex,</if>
+			<if test="entryTime != null  ">entry_time,</if>
+			<if test="contractPeriod != null  ">contract_period,</if>
+			<if test="isActive != null  ">is_active,</if>
+			<if test="telephone != null  and telephone != ''  ">telephone,</if>
+			<if test="workNumber != null  and workNumber != ''  ">work_number,</if>
+			<if test="password != null  and password != ''  ">password,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  and id != ''  ">#{id},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="age != null  ">#{age},</if>
+			<if test="sex != null  ">#{sex},</if>
+			<if test="entryTime != null  ">#{entryTime},</if>
+			<if test="contractPeriod != null  ">#{contractPeriod},</if>
+			<if test="isActive != null  ">#{isActive},</if>
+			<if test="telephone != null  and telephone != ''  ">#{telephone},</if>
+			<if test="workNumber != null  and workNumber != ''  ">#{workNumber},</if>
+			<if test="password != null  and password != ''  ">#{password},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateOStaff" parameterType="OStaff">
+        update o_staff
+       <set>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="age != null  ">age = #{age},</if>
+            <if test="sex != null  ">sex = #{sex},</if>
+            <if test="entryTime != null  ">entry_time = #{entryTime},</if>
+            <if test="contractPeriod != null  ">contract_period = #{contractPeriod},</if>
+            <if test="isActive != null  ">is_active = #{isActive},</if>
+            <if test="telephone != null  and telephone != ''  ">telephone = #{telephone},</if>
+            <if test="workNumber != null  and workNumber != ''  ">work_number = #{workNumber},</if>
+            <if test="password != null  and password != ''  ">password = #{password},</if>
+       </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updateOStaffByIds"  parameterType="java.util.Map">
+        UPDATE o_staff
+        <set>
+           <if test="name != null  and name != ''  ">name = #{name},</if>
+           <if test="age != null  ">age = #{age},</if>
+           <if test="sex != null  ">sex = #{sex},</if>
+           <if test="entryTime != null  ">entry_time = #{entryTime},</if>
+           <if test="contractPeriod != null  ">contract_period = #{contractPeriod},</if>
+           <if test="isActive != null  ">is_active = #{isActive},</if>
+           <if test="telephone != null  and telephone != ''  ">telephone = #{telephone},</if>
+           <if test="workNumber != null  and workNumber != ''  ">work_number = #{workNumber},</if>
+           <if test="password != null  and password != ''  ">password = #{password},</if>
+        </set>
+        WHERE  id in
+        <foreach item="id" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+    </update>
+
+	
+    <delete id="deleteOStaffByIds" parameterType="String">
+        delete from o_staff where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
